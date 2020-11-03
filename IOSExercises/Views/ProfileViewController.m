@@ -14,6 +14,25 @@
 
 @implementation ProfileViewController
 
+typedef NSString * SupportedRegion NS_STRING_ENUM;
+static SupportedRegion SupportedRegionDefault = @"US";
+static SupportedRegion SupportedRegionUS = @"US";
+static SupportedRegion SupportedRegionSpain = @"ES";
+static SupportedRegion SupportedRegionSaudiArabia = @"SA";
+static SupportedRegion SupportedRegionJapan = @"JP";
+static SupportedRegion SupportedRegionKorea = @"KR";
+
+typedef NSString *SupportedLanguage NS_STRING_ENUM;
+static SupportedLanguage SupportedLanguageDefault = @"en";
+static SupportedLanguage SupportedLanguageEnglish = @"en";
+static SupportedLanguage SupportedLanguageSpanish = @"es";
+static SupportedLanguage SupportedLanguageArabic = @"ar-001";
+static SupportedLanguage SupportedLanguageJapanese = @"ar-001";
+static SupportedLanguage SupportedLanguageKorean = @"kr";
+
+const CGFloat iPhoneProfileImageWidth = 150;
+const CGFloat iPhoneProfileImageHeight = 150;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -24,12 +43,14 @@
     if (UIUserInterfaceIdiomPhone == [[UIDevice currentDevice] userInterfaceIdiom]) {
         [self activateIPhoneConstraints];
     }
-    
+
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
+
+#pragma mark - Notification handlers
 
 -(void)OrientationChange:(NSNotification*) notification {
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
@@ -42,6 +63,8 @@
         [self activatePortraitConstratints];
     }
 }
+
+#pragma mark - Constraints handlers
 
 - (void)activatePortraitConstratints {
     [NSLayoutConstraint deactivateConstraints:_nameLabelLandscapeConstraints];
@@ -61,7 +84,7 @@
                                              toItem:nil
                                              attribute:NSLayoutAttributeNotAnAttribute
                                              multiplier:1.0
-                                             constant:150];
+                                             constant:iPhoneProfileImageWidth];
     [profileImageWidth setPriority:UILayoutPriorityDefaultHigh];
 
     NSLayoutConstraint *profileImageHeight = [NSLayoutConstraint
@@ -71,12 +94,11 @@
                                               toItem:nil
                                               attribute:NSLayoutAttributeNotAnAttribute
                                               multiplier:1.0
-                                              constant:150];
+                                              constant:iPhoneProfileImageHeight];
     [profileImageHeight setPriority:UILayoutPriorityDefaultHigh];
 
     [NSLayoutConstraint activateConstraints:@[profileImageWidth,
                                               profileImageHeight]];
-    
 }
 
 @end
