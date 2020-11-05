@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController">
+            <connections>
+                <outlet property="profileImageView" destination="N3h-By-dZa" id="lPJ-9s-6I3"/>
+                <outlet property="view" destination="6b1-IH-XCx" id="aTW-hD-guP"/>
+                <outletCollection property="nameLabelLandscapeConstraints" destination="OF9-cZ-4nf" id="keK-jp-Ndi"/>
+                <outletCollection property="nameLabelLandscapeConstraints" destination="vVS-WG-tAv" id="FIS-zG-wgF"/>
+                <outletCollection property="nameLabelPortraitConstraints" destination="Pb4-ug-chi" id="hYi-Nf-nnZ"/>
+                <outletCollection property="nameLabelPortraitConstraints" destination="fbQ-Yp-Gla" id="DwU-47-cTG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b1-IH-XCx">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+            <subviews>
+                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT" userLabel="Detail View">
+                    <rect key="frame" x="30" y="30" width="354" height="676"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="placeholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="N3h-By-dZa">
+                            <rect key="frame" x="-23" y="138" width="400" height="400"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Hello, hello!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6V-kQ-Wv1" userLabel="Name Label">
+                            <rect key="frame" x="387" y="326.66666666666669" width="89.666666666666686" height="20.666666666666686"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                            <attributedString key="userComments">
+                                <fragment content="Name Placeholder"/>
+                            </attributedString>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEu-Cx-CkU">
+                            <rect key="frame" x="408.33333333333331" y="348.33333333333331" width="47" height="30"/>
+                            <state key="normal" title="Details"/>
+                            <attributedString key="userComments">
+                                <fragment content="Details Button Placeholder"/>
+                            </attributedString>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="u6V-kQ-Wv1" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-1" id="OF9-cZ-4nf"/>
+                        <constraint firstItem="sEu-Cx-CkU" firstAttribute="top" secondItem="u6V-kQ-Wv1" secondAttribute="bottom" constant="1" id="Oex-Hj-TZD"/>
+                        <constraint firstItem="u6V-kQ-Wv1" firstAttribute="centerX" secondItem="N3h-By-dZa" secondAttribute="centerX" priority="750" id="Pb4-ug-chi"/>
+                        <constraint firstItem="N3h-By-dZa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ZPT-OX-GwA"/>
+                        <constraint firstItem="u6V-kQ-Wv1" firstAttribute="top" secondItem="N3h-By-dZa" secondAttribute="bottom" priority="750" constant="10" id="fbQ-Yp-Gla"/>
+                        <constraint firstItem="N3h-By-dZa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="i5n-e4-ULp"/>
+                        <constraint firstItem="sEu-Cx-CkU" firstAttribute="centerX" secondItem="u6V-kQ-Wv1" secondAttribute="centerX" id="qkj-ZB-bYm"/>
+                        <constraint firstItem="u6V-kQ-Wv1" firstAttribute="leading" secondItem="N3h-By-dZa" secondAttribute="trailing" constant="10" id="vVS-WG-tAv"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" constant="30" id="3JF-ed-sfC"/>
+                <constraint firstItem="i5M-Pr-FkT" firstAttribute="top" secondItem="6b1-IH-XCx" secondAttribute="top" constant="30" id="B23-Zz-SYE"/>
+                <constraint firstItem="i5M-Pr-FkT" firstAttribute="leading" secondItem="6b1-IH-XCx" secondAttribute="leading" constant="30" id="d9y-Pz-vUI"/>
+                <constraint firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" constant="30" id="xlQ-7C-nNh"/>
+            </constraints>
+            <point key="canvasLocation" x="102" y="148"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="placeholder.jpg" width="400" height="400"/>
+    </resources>
+</document>

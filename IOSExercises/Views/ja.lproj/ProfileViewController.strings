@@ -1,0 +1,6 @@
+
+/* Class = "UIButton"; normalTitle = "Details"; ObjectID = "sEu-Cx-CkU"; Note = "Details Button Placeholder"; */
+"sEu-Cx-CkU.normalTitle" = "詳細";
+
+/* Class = "UILabel"; text = "Hello, hello!"; ObjectID = "u6V-kQ-Wv1"; Note = "Name Placeholder"; */
+"u6V-kQ-Wv1.text" = "やあやあ！";
