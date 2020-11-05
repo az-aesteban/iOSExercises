@@ -9,42 +9,43 @@
 #import <Foundation/Foundation.h>
 #import "LocaleManager.h"
 
-@interface LocaleManager ()
-
-@end
-
 @implementation LocaleManager
 
-static LocaleManager *localeManager = nil;
+- (NSString *)languageFromRegion {
+    NSString *countryCode = [[NSLocale currentLocale] countryCode];
+    NSString *language;
 
-- (id)init {
-    if (! localeManager) {
-        localeManager = [super init];
+    if (!countryCode) {
+        NSAssert(NO, @"LocaleManager: No country code found for current locale.");
+        return language;
     }
-    return localeManager;
-}
 
-- (NSDictionary *) getRegions {
-    return  @{
-        SupportedRegionDefault: SupportedLanguageDefault,
-        SupportedRegionUS: SupportedLanguageEnglish,
-        SupportedRegionJapan: SupportedLanguageJapanese,
-        SupportedRegionKorea: SupportedLanguageKorean,
-        SupportedRegionSpain: SupportedLanguageSpanish,
-        SupportedRegionSaudiArabia: SupportedLanguageArabic
-    };
-}
-
-- (SupportedLanguage) getPreferredLanguage {
-    return [[self getRegions] valueForKey:[[NSLocale currentLocale] countryCode]];
-}
-
-+(LocaleManager *) getManager {
-    if (!localeManager) {
-        localeManager = [[LocaleManager alloc] init];
+    if ([countryCode isEqualToString:@"US"]) {
+        language = @"en";
+    } else if ([countryCode isEqualToString:@"JP"]) {
+        language = @"ja";
+    } else if ([countryCode isEqualToString:@"KR"]) {
+        language = @"ko";
+    } else if ([countryCode isEqualToString:@"ES"]) {
+        language = @"es";
+    } else if ([countryCode isEqualToString:@"SA"]) {
+        language = @"ar";
     }
-    return localeManager;
+
+    return language;
 }
 
++ (instancetype)sharedInstance {
+    static LocaleManager *instance = nil;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[LocaleManager alloc] init];
+        [instance setValue:[instance languageFromRegion]
+                    forKey:@"preferredLanguage"];
+    });
+
+    return instance;
+}
 
 @end

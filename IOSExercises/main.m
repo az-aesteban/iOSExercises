@@ -8,16 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import "Classes/LocaleManager.h"
+#import "LocaleManager.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"AppleLanguages"];
-        NSString *appLanguage = [[LocaleManager getManager] getPreferredLanguage];
+        NSString *appLanguage = [[LocaleManager sharedInstance] preferredLanguage];
 
-        if (appLanguage == nil) {
-            NSLog(@"Region is not supported. Setting English as default language.");
-            appLanguage = SupportedLanguageDefault;
+        if (!appLanguage) {
+            NSLog(@"main: Region is not supported. Setting English as default language.");
+            appLanguage = @"en";
         }
 
         [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObjects:appLanguage, @"en", nil]

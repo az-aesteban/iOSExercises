@@ -11,6 +11,8 @@
 
 @interface AppDelegate ()
 
+@property (strong, nonatomic) ProfileViewController *profileViewController;
+
 @end
 
 @implementation AppDelegate
@@ -20,7 +22,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController"
-                                                                                  bundle:nil];
+                                                                                           bundle:[NSBundle mainBundle]];
 
     self.window.rootViewController = profileViewController;
     [self.window makeKeyAndVisible];
