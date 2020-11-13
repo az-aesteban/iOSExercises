@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "DetailsViewController.h"
 
 const CGFloat iPhoneProfileImageWidth = 150.f;
 const CGFloat iPhoneProfileImageHeight = 150.f;
@@ -19,7 +20,9 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
 
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *nameLabelLandscapeConstraints;
 
-@property (nonatomic, strong) NSMutableArray<NSLayoutConstraint *> *landscapeConstraints;
+@property (strong, nonatomic) NSMutableArray<NSLayoutConstraint *> *landscapeConstraints;
+
+@property (strong, nonatomic) DetailsViewController *detailsViewController;
 
 @end
 
@@ -33,7 +36,20 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
     }
 }
 
-#pragma mark - Constraints handlers
+#pragma mark - Screen Navigation Methods
+
+- (IBAction)pushDetailsViewController:(UIButton *)sender {
+    if (!self.detailsViewController) {
+        self.detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController"
+                                                                        bundle:[NSBundle mainBundle]];
+    }
+    self.detailsViewController.title = @"Hello, hello!"; // later dapat value ni sa profile view label
+    [self.navigationController pushViewController:self.detailsViewController
+                                         animated:YES];
+}
+
+
+#pragma mark - Constraints Methods
 
 - (void)viewWillTransitionToSize:(CGSize)size
                                  withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {

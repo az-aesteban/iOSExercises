@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailsViewController">
+            <connections>
+                <outlet property="birthdayInfoButton" destination="Pgg-XR-e0I" id="9qx-HF-pLR"/>
+                <outlet property="birthdayLabel" destination="CkP-eW-kXT" id="WMY-Ap-Rmk"/>
+                <outlet property="colorLabel" destination="Ndr-n3-0eT" id="Lcl-kK-rMF"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="QeZ-Tk-TNM" userLabel="Details View">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hlt-gr-KiK" userLabel="Color Label">
+                            <rect key="frame" x="30" y="141" width="68" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdy-0E-oaE" userLabel="Birthday Label">
+                            <rect key="frame" x="30" y="100" width="68" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CkP-eW-kXT" userLabel="Selected Birthday">
+                            <rect key="frame" x="128" y="100" width="122" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgg-XR-e0I" userLabel="Birthday Info Button">
+                            <rect key="frame" x="260" y="100" width="25" height="24"/>
+                            <connections>
+                                <action selector="greetIfBirthday:" destination="-1" eventType="touchUpInside" id="3hF-8y-8Db"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Black" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ndr-n3-0eT" userLabel="Selected Color">
+                            <rect key="frame" x="128" y="141" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="rdy-0E-oaE" firstAttribute="leading" secondItem="QeZ-Tk-TNM" secondAttribute="leading" constant="30" id="0en-xs-sfU"/>
+                        <constraint firstItem="Pgg-XR-e0I" firstAttribute="top" secondItem="QeZ-Tk-TNM" secondAttribute="top" constant="100" id="BIb-v8-XnK"/>
+                        <constraint firstItem="Hlt-gr-KiK" firstAttribute="top" secondItem="rdy-0E-oaE" secondAttribute="bottom" constant="20" id="Snb-8v-Ld0"/>
+                        <constraint firstItem="CkP-eW-kXT" firstAttribute="leading" secondItem="rdy-0E-oaE" secondAttribute="trailing" constant="30" id="awz-G5-nZZ"/>
+                        <constraint firstItem="rdy-0E-oaE" firstAttribute="top" secondItem="QeZ-Tk-TNM" secondAttribute="top" constant="100" id="s4h-fV-k7p"/>
+                        <constraint firstItem="Pgg-XR-e0I" firstAttribute="leading" secondItem="CkP-eW-kXT" secondAttribute="trailing" constant="10" id="sgP-Q6-YWw"/>
+                        <constraint firstItem="Ndr-n3-0eT" firstAttribute="leading" secondItem="Hlt-gr-KiK" secondAttribute="trailing" constant="30" id="u62-BM-Put"/>
+                        <constraint firstItem="Hlt-gr-KiK" firstAttribute="leading" secondItem="QeZ-Tk-TNM" secondAttribute="leading" constant="30" id="vLb-Z0-yYk"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <point key="canvasLocation" x="137.68115942028987" y="135.9375"/>
+        </view>
+    </objects>
+</document>
