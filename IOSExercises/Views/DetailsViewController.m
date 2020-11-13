@@ -123,7 +123,6 @@
     self.popoverViewController.view = [[UIView alloc] init];
     [self.popoverViewController setPreferredContentSize:CGSizeMake(250.f, 270.f)];
 
-    //[self setBirthday];
     if (!self.datePicker) {
         self.datePicker = [[UIDatePicker alloc] init];
     }

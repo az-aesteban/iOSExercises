@@ -34,6 +34,10 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
     if (UIUserInterfaceIdiomPhone == [[UIDevice currentDevice] userInterfaceIdiom]) {
         [self activateIPhoneConstraints];
     }
+
+    UIDeviceOrientation orientation = self.view.bounds.size.width > self.view.bounds.size.height ? UIDeviceOrientationLandscapeRight: UIDeviceOrientationPortrait;
+
+    [self setupConstraints:orientation];
 }
 
 #pragma mark - Screen Navigation Methods
@@ -43,6 +47,7 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
         self.detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController"
                                                                         bundle:[NSBundle mainBundle]];
     }
+
     self.detailsViewController.title = @"Hello, hello!"; // later dapat value ni sa profile view label
     [self.navigationController pushViewController:self.detailsViewController
                                          animated:YES];
