@@ -14,9 +14,12 @@
 		6B643E1B254DB223005D74DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B643E1A254DB223005D74DF /* main.m */; };
 		6B643E33254DBF40005D74DF /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B643E31254DBF40005D74DF /* ProfileViewController.m */; };
 		6B743D1C255543330071B7D7 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B743D1A255543330071B7D7 /* DetailsViewController.m */; };
-		6B743D1D255543330071B7D7 /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B743D1B255543330071B7D7 /* DetailsViewController.xib */; };
-		6BA7F80825506B4D00114431 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BA7F80725506B4D00114431 /* placeholder.jpg */; };
+		6B83B0D4256E2BB7009C2509 /* placeholder-person.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0D1256E2BB7009C2509 /* placeholder-person.jpg */; };
+		6B83B0D5256E2BB7009C2509 /* placeholder-person@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0D2256E2BB7009C2509 /* placeholder-person@3x.jpg */; };
+		6B83B0D6256E2BB7009C2509 /* placeholder-person@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0D3256E2BB7009C2509 /* placeholder-person@2x.jpg */; };
+		6B8AABB6256CEF92007507C8 /* EXRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AABB5256CEF92007507C8 /* EXRColor.m */; };
 		6BA7F8182550730300114431 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA7F81A2550730300114431 /* ProfileViewController.xib */; };
+		6BD77D54255E239800861ECE /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BD77D56255E239800861ECE /* DetailsViewController.xib */; };
 		6BE65C9325526A3000EC250D /* LocaleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE65C9225526A3000EC250D /* LocaleManager.m */; };
 /* End PBXBuildFile section */
 
@@ -33,13 +36,18 @@
 		6B643E31254DBF40005D74DF /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		6B743D19255543330071B7D7 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		6B743D1A255543330071B7D7 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
-		6B743D1B255543330071B7D7 /* DetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsViewController.xib; sourceTree = "<group>"; };
+		6B83B0D1256E2BB7009C2509 /* placeholder-person.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-person.jpg"; sourceTree = "<group>"; };
+		6B83B0D2256E2BB7009C2509 /* placeholder-person@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-person@3x.jpg"; sourceTree = "<group>"; };
+		6B83B0D3256E2BB7009C2509 /* placeholder-person@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-person@2x.jpg"; sourceTree = "<group>"; };
+		6B8AABB4256CEF92007507C8 /* EXRColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXRColor.h; sourceTree = "<group>"; };
+		6B8AABB5256CEF92007507C8 /* EXRColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXRColor.m; sourceTree = "<group>"; };
+		6B8D1D0A256CC61000CEA7A0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/DetailsViewController.strings; sourceTree = "<group>"; };
 		6BA7870A2551459000BBE3A8 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ProfileViewController.strings; sourceTree = "<group>"; };
-		6BA7F80725506B4D00114431 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		6BA7F8192550730300114431 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
 		6BA7F828255073B100114431 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ProfileViewController.strings; sourceTree = "<group>"; };
 		6BA7F82C255073B800114431 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ProfileViewController.strings; sourceTree = "<group>"; };
 		6BA7F82D2550743200114431 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ProfileViewController.strings; sourceTree = "<group>"; };
+		6BD77D55255E239800861ECE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DetailsViewController.xib; sourceTree = "<group>"; };
 		6BE65C9225526A3000EC250D /* LocaleManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocaleManager.m; sourceTree = "<group>"; };
 		6BE65C9425526A4C00EC250D /* LocaleManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocaleManager.h; sourceTree = "<group>"; };
 		6BE65C95255286F300EC250D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ProfileViewController.strings; sourceTree = "<group>"; };
@@ -92,7 +100,9 @@
 		6B643E22254DB4FF005D74DF /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				6BA7F80725506B4D00114431 /* placeholder.jpg */,
+				6B83B0D1256E2BB7009C2509 /* placeholder-person.jpg */,
+				6B83B0D3256E2BB7009C2509 /* placeholder-person@2x.jpg */,
+				6B83B0D2256E2BB7009C2509 /* placeholder-person@3x.jpg */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -105,7 +115,7 @@
 				6BA7F81A2550730300114431 /* ProfileViewController.xib */,
 				6B743D19255543330071B7D7 /* DetailsViewController.h */,
 				6B743D1A255543330071B7D7 /* DetailsViewController.m */,
-				6B743D1B255543330071B7D7 /* DetailsViewController.xib */,
+				6BD77D56255E239800861ECE /* DetailsViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -115,6 +125,8 @@
 			children = (
 				6BE65C9225526A3000EC250D /* LocaleManager.m */,
 				6BE65C9425526A4C00EC250D /* LocaleManager.h */,
+				6B8AABB4256CEF92007507C8 /* EXRColor.h */,
+				6B8AABB5256CEF92007507C8 /* EXRColor.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -181,10 +193,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B643E18254DB223005D74DF /* LaunchScreen.storyboard in Resources */,
+				6B83B0D6256E2BB7009C2509 /* placeholder-person@2x.jpg in Resources */,
 				6B643E15254DB223005D74DF /* Assets.xcassets in Resources */,
-				6B743D1D255543330071B7D7 /* DetailsViewController.xib in Resources */,
+				6B83B0D5256E2BB7009C2509 /* placeholder-person@3x.jpg in Resources */,
+				6B83B0D4256E2BB7009C2509 /* placeholder-person.jpg in Resources */,
+				6BD77D54255E239800861ECE /* DetailsViewController.xib in Resources */,
 				6BA7F8182550730300114431 /* ProfileViewController.xib in Resources */,
-				6BA7F80825506B4D00114431 /* placeholder.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B643E0A254DB221005D74DF /* AppDelegate.m in Sources */,
+				6B8AABB6256CEF92007507C8 /* EXRColor.m in Sources */,
 				6BE65C9325526A3000EC250D /* LocaleManager.m in Sources */,
 				6B643E1B254DB223005D74DF /* main.m in Sources */,
 				6B743D1C255543330071B7D7 /* DetailsViewController.m in Sources */,
@@ -226,6 +241,15 @@
 				6BE65C95255286F300EC250D /* ja */,
 			);
 			name = ProfileViewController.xib;
+			sourceTree = "<group>";
+		};
+		6BD77D56255E239800861ECE /* DetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6BD77D55255E239800861ECE /* Base */,
+				6B8D1D0A256CC61000CEA7A0 /* ar */,
+			);
+			name = DetailsViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

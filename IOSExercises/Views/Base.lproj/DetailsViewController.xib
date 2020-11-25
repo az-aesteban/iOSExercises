@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailsViewController">
+            <connections>
+                <outlet property="birthdayButton" destination="jPq-3D-wyj" id="mET-Wy-HQL"/>
+                <outlet property="birthdayInfoButton" destination="Pgg-XR-e0I" id="9qx-HF-pLR"/>
+                <outlet property="colorButton" destination="1S0-JX-uhI" id="8GX-YT-pNA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATD-jL-sYI" userLabel="Details View">
+                    <rect key="frame" x="0.0" y="0.0" width="834" height="1174"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEu-Ev-sE9">
+                            <rect key="frame" x="29" y="50" width="65" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zK-O5-MIY">
+                            <rect key="frame" x="29" y="91" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPq-3D-wyj">
+                            <rect key="frame" x="114" y="44" width="73" height="33"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="January 1">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="didTapBirthdayButton:" destination="-1" eventType="touchUpInside" id="9bE-bQ-U1R"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgg-XR-e0I" userLabel="Birthday Info Button">
+                            <rect key="frame" x="207" y="48" width="25" height="24"/>
+                            <connections>
+                                <action selector="didTapBirthdayInfoButton:" destination="-1" eventType="touchUpInside" id="3hF-8y-8Db"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1S0-JX-uhI">
+                            <rect key="frame" x="91" y="85" width="42" height="33"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="Black">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="didTapColorButton:" destination="-1" eventType="touchUpInside" id="8XY-Q9-Wdo"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="1S0-JX-uhI" firstAttribute="top" secondItem="jPq-3D-wyj" secondAttribute="bottom" constant="8" id="5cd-O5-K3q"/>
+                        <constraint firstItem="zEu-Ev-sE9" firstAttribute="leading" secondItem="3Ik-cq-afk" secondAttribute="leading" constant="29" id="9pP-g9-1bk"/>
+                        <constraint firstItem="jPq-3D-wyj" firstAttribute="leading" secondItem="zEu-Ev-sE9" secondAttribute="trailing" constant="20" id="Gv0-UQ-3Zr"/>
+                        <constraint firstItem="zEu-Ev-sE9" firstAttribute="top" secondItem="3Ik-cq-afk" secondAttribute="top" constant="50" id="P3f-pR-KfL"/>
+                        <constraint firstItem="Pgg-XR-e0I" firstAttribute="top" secondItem="3Ik-cq-afk" secondAttribute="top" constant="48" id="QTN-2E-G4M"/>
+                        <constraint firstItem="4zK-O5-MIY" firstAttribute="top" secondItem="zEu-Ev-sE9" secondAttribute="bottom" constant="20" id="Qa2-sK-5pk"/>
+                        <constraint firstItem="4zK-O5-MIY" firstAttribute="leading" secondItem="3Ik-cq-afk" secondAttribute="leading" constant="29" id="aWK-1e-Jja"/>
+                        <constraint firstItem="Pgg-XR-e0I" firstAttribute="leading" secondItem="jPq-3D-wyj" secondAttribute="trailing" constant="20" id="nXj-Ix-aTB"/>
+                        <constraint firstItem="1S0-JX-uhI" firstAttribute="leading" secondItem="4zK-O5-MIY" secondAttribute="trailing" constant="20" id="pQM-a7-vaT"/>
+                        <constraint firstItem="jPq-3D-wyj" firstAttribute="top" secondItem="3Ik-cq-afk" secondAttribute="top" constant="44" id="teG-XN-Fgq"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="3Ik-cq-afk"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="ATD-jL-sYI" firstAttribute="bottom" secondItem="cEk-gd-dFh" secondAttribute="bottom" id="JQC-rd-nTy"/>
+                <constraint firstItem="ATD-jL-sYI" firstAttribute="top" secondItem="cEk-gd-dFh" secondAttribute="top" id="RT1-QI-o3r"/>
+                <constraint firstItem="ATD-jL-sYI" firstAttribute="leading" secondItem="cEk-gd-dFh" secondAttribute="leading" id="aBF-jz-14e"/>
+                <constraint firstItem="cEk-gd-dFh" firstAttribute="trailing" secondItem="ATD-jL-sYI" secondAttribute="trailing" id="bcm-LV-oa6"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="cEk-gd-dFh"/>
+            <point key="canvasLocation" x="137.41007194244605" y="135.678391959799"/>
+        </view>
+    </objects>
+</document>

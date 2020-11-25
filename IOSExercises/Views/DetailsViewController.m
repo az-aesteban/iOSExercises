@@ -7,12 +7,15 @@
 //
 
 #import "DetailsViewController.h"
+#import "EXRColor.h"
+
+static NSString *kBirthdayDateFormat = @"MMMM d";
 
 @interface DetailsViewController() <UIPopoverPresentationControllerDelegate>
 
-@property (strong, nonatomic) IBOutlet UILabel *colorLabel;
+@property (strong, nonatomic) IBOutlet UIButton *colorButton;
 
-@property (strong, nonatomic) IBOutlet UILabel *birthdayLabel;
+@property (strong, nonatomic) IBOutlet UIButton *birthdayButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *birthdayInfoButton;
 
@@ -22,56 +25,49 @@
 
 @end
 
-@implementation DetailsViewController
+@implementation DetailsViewController {
+    NSArray<EXRColor *> *_availableColorOptions;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initDefaultValue];
-    [self initUserInteraction];
+    [self setupAvailableColors];
+    [self setupDefaultValue];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self setupRightBarButtonItem];
 }
 
 #pragma mark - User Interaction Handlers
 
-- (void)initUserInteraction {
 
-    UITapGestureRecognizer *colorLabelTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                           action:@selector(showColorPicker:)];
-    
-    colorLabelTapGesture.numberOfTapsRequired = 1;
-
-    [self.colorLabel setUserInteractionEnabled:YES];
-    [self.colorLabel addGestureRecognizer:colorLabelTapGesture];
-
-    UITapGestureRecognizer *birthdayLabelTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                              action:@selector(showDatePicker:)];
-    [self.birthdayLabel setUserInteractionEnabled:YES];
-    [self.birthdayLabel addGestureRecognizer:birthdayLabelTapGesture];
-}
-
-- (void)showColorPicker:(UITapGestureRecognizer *)recognizer {
+- (IBAction)didTapColorButton:(id)sender {
     if (UIUserInterfaceIdiomPhone == [[UIDevice currentDevice] userInterfaceIdiom]) {
-        /*
-         * Display as action sheet
-         * Currently logs layout constraints conflict error
-         * Looks like a bug from Apple
-         * See https://github.com/lionheart/openradar-mirror/issues/21120
-         */
+        //
+        // Display as action sheet
+        // Currently logs layout constraints conflict error
+        // Looks like a bug from Apple
+        // See https://github.com/lionheart/openradar-mirror/issues/21120
+        //
         [self displayColorPickerActionSheet];
     } else {
-        [self popoverColorPicker];
+        [self displayPopoverColorPicker];
     }
 }
 
-- (void)showDatePicker:(UITapGestureRecognizer *)recognizer {
-    [self popoverDateTimePicker];
+- (IBAction)didTapBirthdayButton:(id)sender {
+    NSLog(@"DetailsViewController: Date picker tapped");
+    [self displayPopoverDateTimePicker];
 }
 
-- (IBAction)greetIfBirthday:(id)sender {
+- (IBAction)didTapBirthdayInfoButton:(id)sender {
+    NSLog(@"DetailsViewController: User did tap Birthday button");
     NSDateFormatter *dateFormatter = [self birthdayFormatter];
 
-    NSDate *birthdate = [dateFormatter dateFromString:self.birthdayLabel.text];
+    NSDate *birthdate = [dateFormatter dateFromString:self.birthdayButton.currentTitle];
 
-    NSDateComponents *bdayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth
+    NSDateComponents *birthdayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth
                                                                       fromDate:birthdate];
     NSDateComponents *todayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth
                                                                        fromDate:[NSDate date]];
@@ -80,130 +76,101 @@
 
     // Currently comparing day and month date components instead of inSameDayAsDate
     if (birthdate
-        && bdayComponent.day == todayComponent.day
-        && bdayComponent.month == todayComponent.month) {
+        && birthdayComponent.day == todayComponent.day
+        && birthdayComponent.month == todayComponent.month) {
         greeting = @"Happy birthday!";
     } else {
         greeting = @"It's not your birthday";
     }
-    [self popoverWithGreeting:greeting];
+    [self displayPopoverWithGreeting:greeting];
 }
 
-- (IBAction)chooseColorRed:(id)sender {
-    [self.colorLabel setText:@"Red"];
+- (IBAction)didChooseColor:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    NSString *color = button.currentTitle;
+    NSLog(@"DetailsViewController: User chose %@", color);
+    [self.colorButton setTitle:color
+                      forState:UIControlStateNormal];
 }
 
-- (IBAction)chooseColorBlue:(id)sender {
-    [self.colorLabel setText:@"Blue"];
-}
-
-- (IBAction)chooseColorBlack:(id)sender {
-    [self.colorLabel setText:@"Black"];
-}
-
-- (IBAction)saveBirthday:(id)sender {
+- (IBAction)setBirthday:(id)sender {
     if (self.datePicker) {
-        NSLog(@"Saving birthday");
         [self setBirthdayWithDate:[self.datePicker date]];
     }
-    NSLog(@"DetailsViewController: Birthday was not saved");
 
     [self.popoverViewController dismissViewControllerAnimated:YES
                                                    completion:nil];
+}
+
+- (IBAction)saveProfile:(id)sender {
+    NSLog(@"DetailsViewController: Changes have not been saved");
     [self promptErrorWithMessage:@"Changes have not been saved"];
 }
 
 #pragma mark - Popover View Controller Methods
 
-- (void)popoverDateTimePicker{
+- (void)displayPopoverDateTimePicker {
     if (!self.popoverViewController) {
         self.popoverViewController = [[UIViewController alloc] init];
     }
     
     self.popoverViewController.view = [[UIView alloc] init];
-    [self.popoverViewController setPreferredContentSize:CGSizeMake(250.f, 270.f)];
 
     if (!self.datePicker) {
         self.datePicker = [[UIDatePicker alloc] init];
     }
-    [self.datePicker setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.datePicker setDatePickerMode:UIDatePickerModeDate];
+    self.datePicker.translatesAutoresizingMaskIntoConstraints = NO;
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
     [self.popoverViewController.view addSubview:self.datePicker];
 
     UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [saveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [saveButton setTitle:@"Save"
+    [saveButton setTitle:@"Set"
                 forState:UIControlStateNormal];
     [saveButton addTarget:self
-                   action:@selector(saveBirthday:)
+                   action:@selector(setBirthday:)
          forControlEvents:UIControlEventTouchUpInside];
 
     [self.popoverViewController.view addSubview:saveButton];
 
-    [self.popoverViewController setModalPresentationStyle:UIModalPresentationPopover];
+    self.popoverViewController.modalPresentationStyle = UIModalPresentationPopover;
     [self presentViewController:self.popoverViewController
                        animated:YES
                      completion:nil];
 
-    NSDictionary *views = @{
-        @"datePicker" : self.datePicker,
-        @"saveButton" : saveButton
-    };
+    [self.datePicker.centerXAnchor constraintEqualToAnchor:self.popoverViewController.view.centerXAnchor].active = YES;
+    [self.datePicker.centerYAnchor constraintEqualToAnchor:self.popoverViewController.view.centerYAnchor].active = YES;
+    [saveButton.topAnchor constraintEqualToAnchor:self.datePicker.bottomAnchor constant:5.f].active = YES;
+    [saveButton.centerXAnchor constraintEqualToAnchor:self.popoverViewController.view.centerXAnchor].active = YES;
 
-    for (NSString *viewName in views) {
-        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|[%@]|", viewName]
-                                                                                        options:0
-                                                                                        metrics:nil
-                                                                                          views:views]];
-    }
+    #warning Ok for now. But for localization compute based content size.
+    self.popoverViewController.preferredContentSize = CGSizeMake(300.f, 300.f);
 
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[datePicker]|"
-                                                                                    options:0
-                                                                                    metrics:nil
-                                                                                    views:views]];
-
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[datePicker]-[saveButton]"
-                                                                                    options:0
-                                                                                    metrics:nil
-                                                                                      views:views]];
 
     UIPopoverPresentationController *popoverController = [self.popoverViewController popoverPresentationController];
 
     [popoverController setPermittedArrowDirections:UIPopoverArrowDirectionAny];
 
-    [popoverController setSourceView:self.birthdayLabel];
-    [popoverController setSourceRect:self.birthdayLabel.bounds];
+    [popoverController setSourceView:self.birthdayButton];
+    [popoverController setSourceRect:self.birthdayButton.bounds];
 }
 
-- (void)popoverWithGreeting:(NSString *)aGreeting {
-
+- (void)displayPopoverWithGreeting:(NSString *)aGreeting {
     UIViewController *greetingViewController = [[UIViewController alloc] init];
-
-
     greetingViewController.view = [[UIView alloc] init];
-    [greetingViewController setPreferredContentSize:CGSizeMake(200.f, 200.f)];
+
+    #warning Ok for now. But for localization compute based content size.
+    greetingViewController.preferredContentSize = CGSizeMake(200.f, 200.f);
 
     UILabel *greetingLabel = [UILabel new];
-    [greetingLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [greetingLabel setText:aGreeting];
+    greetingLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    greetingLabel.text = aGreeting;
     [greetingViewController.view addSubview:greetingLabel];
 
-    NSDictionary *views = @{
-        @"greetingLabel": greetingLabel,
-        @"superView": greetingViewController.view
-    };
-  
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[superView]-(<=1)-[greetingLabel]"
-                                                                                    options:NSLayoutFormatAlignAllCenterY
-                                                                                    metrics:nil
-                                                                                    views:views]];
-
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[superView]-(<=1)-[greetingLabel]"
-                                                                                    options:NSLayoutFormatAlignAllCenterX
-                                                                                    metrics:nil
-                                                                                      views:views]];
-
-    [greetingViewController setModalPresentationStyle:UIModalPresentationPopover];
+    [greetingLabel.centerXAnchor constraintEqualToAnchor:greetingViewController.view.centerXAnchor].active = YES;
+    [greetingLabel.centerYAnchor constraintEqualToAnchor:greetingViewController.view.centerYAnchor].active = YES;
+    
+    [greetingViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [self presentViewController:greetingViewController
                        animated:YES
                      completion:nil];
@@ -211,8 +178,8 @@
     UIPopoverPresentationController *popoverController = [greetingViewController popoverPresentationController];
     popoverController.permittedArrowDirections = UIPopoverArrowDirectionAny;
 
-    [popoverController setSourceView:self.birthdayInfoButton];
-    [popoverController setSourceRect:self.birthdayInfoButton.bounds];
+    popoverController.sourceView = self.birthdayInfoButton;
+    popoverController.sourceRect = self.birthdayInfoButton.bounds;
 }
 
 - (void)promptErrorWithMessage:(NSString *)aMessage {
@@ -230,72 +197,56 @@
 }
 
 - (void)displayColorPickerActionSheet {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
-                                                                   message:@""
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Choose a color"
+                                                                   message:@"Choose from the available colors"
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
 
-    for (NSString *color in [NSArray arrayWithObjects:@"Red", @"Blue", @"Black", nil]) {
-        UIAlertAction *action = [self actionChooseColor:color];
+    for (EXRColor *color in _availableColorOptions) {
+        UIAlertAction *action = [self alertActionForChoosingColor:color.colorName];
         [alert addAction:action];
     }
-
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                            NSLog(@"DetailsViewController: User did not choose a color");}];
+    [alert addAction:cancelAction];
+    
     [self presentViewController:alert
                        animated:YES
                      completion:nil];
 }
 
-- (void)popoverColorPicker {
+- (UIButton *)createButtonForColor:(EXRColor *)aColor {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+    [button setTitle:aColor.colorName
+            forState:UIControlStateNormal];
+    [button addTarget:self
+               action:@selector(didChooseColor:)
+     forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
+- (void)populateColorPickerView:(UIView *)aView {
+    for (EXRColor *color in _availableColorOptions) {
+        UIButton *button = [self createButtonForColor:color];
+
+        UIButton *lastButton = aView.subviews.count ? aView.subviews.lastObject: nil;
+        [aView addSubview:button];
+
+        [button.centerXAnchor constraintEqualToAnchor:aView.centerXAnchor].active = YES;
+
+        [button.centerYAnchor constraintEqualToAnchor:lastButton ? lastButton.bottomAnchor : aView.safeAreaLayoutGuide.topAnchor
+                                             constant: 25.f].active = YES;
+    }
+}
+
+- (void)displayPopoverColorPicker {
     UIViewController *controller = [[UIViewController alloc] init];
     controller.view = [[UIView alloc] init];
     [controller setPreferredContentSize:CGSizeMake(200.f, 125.f)];
 
-    NSArray<NSDictionary *> *colors = [NSArray arrayWithObjects:@{
-         @"colorName" : @"Red",
-        @"buttonName" : @"redButton",
-          @"selector" : [NSValue valueWithPointer:@selector(chooseColorRed:)],
-          @"topLabel" : @"|"
-      },
-      @{
-         @"colorName" : @"Blue",
-        @"buttonName" : @"blueButton",
-          @"selector" : [NSValue valueWithPointer:@selector(chooseColorBlue:)],
-          @"topLabel" : @"[redButton]"
-      },
-      @{
-        @"colorName" : @"Black",
-        @"buttonName" : @"blackButton",
-         @"selector" : [NSValue valueWithPointer:@selector(chooseColorBlack:)],
-         @"topLabel" : @"[blueButton]"
-      }, nil];
-
-    NSMutableDictionary *buttonViews = [[NSMutableDictionary alloc] init];
-
-    for (NSDictionary *color in colors) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        [button setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [button setTitle:[color objectForKey:@"colorName"]
-                forState:UIControlStateNormal];
-        [button addTarget:self action:[[color objectForKey:@"selector"] pointerValue]
-         forControlEvents:UIControlEventTouchUpInside];
-
-        [controller.view addSubview:button];
-    
-        NSDictionary *views = @{@"button": button};
-        [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|[button]|"]
-                                                                                        options:0
-                                                                                        metrics:nil
-                                                                                          views:views]];
-
-        [buttonViews setValue:button
-                       forKey:[color objectForKey:@"buttonName"]];
-
-    }
-
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[redButton]-[blueButton]-[blackButton]"
-                                                                                    options:0
-                                                                                    metrics:nil
-                                                                                      views:buttonViews]];
-
+    [self populateColorPickerView:controller.view];
     [controller setModalPresentationStyle:UIModalPresentationPopover];
     [self presentViewController:controller
                        animated:YES
@@ -303,38 +254,51 @@
 
     UIPopoverPresentationController *popoverController = [controller popoverPresentationController];
 
-    [popoverController setPermittedArrowDirections:UIPopoverArrowDirectionAny];
-
-    [popoverController setSourceView:self.colorLabel];
-    [popoverController setSourceRect:self.colorLabel.bounds];
+    [popoverController setSourceView:self.colorButton];
+    [popoverController setSourceRect:self.colorButton.bounds];
 }
 
 #pragma mark - Helper Methods
 
-- (void)initDefaultValue {
-    [self.colorLabel setText:@"Black"];
-    [self.birthdayLabel setText:[[self birthdayFormatter] stringFromDate:[NSDate dateWithTimeIntervalSince1970:0]]];
+- (void)setupDefaultValue {
+    [self.colorButton setTitle:@"Black"
+                      forState:UIControlStateNormal];
+    NSDate *defaultDate = [NSDate dateWithTimeIntervalSince1970:0];
+    [self.birthdayButton setTitle:[[self birthdayFormatter] stringFromDate:defaultDate]
+                         forState:UIControlStateNormal];
 }
 
 -(NSDateFormatter *)birthdayFormatter {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMMM d"];
+    [dateFormatter setDateFormat:kBirthdayDateFormat];
     return dateFormatter;
 }
 
 - (void)setBirthdayWithDate:(NSDate *)aDate {
     // to be retrieved from date picker
     NSDateFormatter *dateFormatter = [self birthdayFormatter];
-    [self.birthdayLabel setText:[dateFormatter stringFromDate:aDate]];
+    [self.birthdayButton setTitle:[dateFormatter stringFromDate:aDate]
+                         forState:UIControlStateNormal];
 }
 
-- (UIAlertAction *)actionChooseColor:(NSString *)aTitle {
+- (UIAlertAction *)alertActionForChoosingColor:(NSString *)aTitle {
     return [UIAlertAction actionWithTitle:aTitle
                                     style:UIAlertActionStyleDefault
                                   handler:^(UIAlertAction *action) {
                                       NSLog(@"DetailsViewController: %@ was selected", aTitle);
-                                      [self.colorLabel setText:aTitle];
+                                      [self.colorButton setTitle:aTitle
+                                                        forState:UIControlStateNormal];
                                   }];
+}
+
+- (void)setupAvailableColors {
+    _availableColorOptions = [NSArray arrayWithObjects:[EXRColor colorNamed:@"Blue"], [EXRColor colorNamed:@"Red"], [EXRColor colorNamed:@"Black"], nil];
+}
+
+- (void)setupRightBarButtonItem {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                                                                           target:self
+                                                                                           action:@selector(saveProfile:)];
 }
 
 @end
