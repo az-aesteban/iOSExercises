@@ -7,6 +7,8 @@
 //
 
 #import "ProfileViewController.h"
+#import "DetailsViewController.h"
+#import "EXRColor.h"
 
 const CGFloat iPhoneProfileImageWidth = 150.f;
 const CGFloat iPhoneProfileImageHeight = 150.f;
@@ -15,11 +17,15 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 
+@property (strong, nonatomic) IBOutlet UILabel *nameLabelButton;
+
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *nameLabelPortraitConstraints;
 
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *nameLabelLandscapeConstraints;
 
-@property (nonatomic, strong) NSMutableArray<NSLayoutConstraint *> *landscapeConstraints;
+@property (strong, nonatomic) NSMutableArray<NSLayoutConstraint *> *landscapeConstraints;
+
+@property (strong, nonatomic) DetailsViewController *detailsViewController;
 
 @end
 
@@ -31,9 +37,37 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
     if (UIUserInterfaceIdiomPhone == [[UIDevice currentDevice] userInterfaceIdiom]) {
         [self activateIPhoneConstraints];
     }
+
+    UIDeviceOrientation orientation = self.view.bounds.size.width > self.view.bounds.size.height ? UIDeviceOrientationLandscapeRight : UIDeviceOrientationPortrait;
+
+    [self setupConstraints:orientation];
+    [self setupStyles];
 }
 
-#pragma mark - Constraints handlers
+#pragma mark - Setup Style Methods
+
+- (void)setupStyles {
+    self.nameLabelButton.layer.borderColor = [UIColor blackColor].CGColor;
+    self.nameLabelButton.layer.borderWidth = 0.5f;
+
+    self.profileImageView.layer.borderColor = [UIColor redColor].CGColor;
+    self.profileImageView.layer.borderWidth = 0.5f;
+}
+
+#pragma mark - Screen Navigation Methods
+
+- (IBAction)pushDetailsViewController:(UIButton *)sender {
+    if (!self.detailsViewController) {
+        self.detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController"
+                                                                             bundle:[NSBundle mainBundle]];
+    }
+    self.detailsViewController.title = @"Hello, hello!";
+    [self.navigationController pushViewController:self.detailsViewController
+                                         animated:YES];
+}
+
+
+#pragma mark - Constraints Methods
 
 - (void)viewWillTransitionToSize:(CGSize)size
                                  withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -66,18 +100,8 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
 }
 
 - (void)activateIPhoneConstraints {
-
-    NSDictionary *views = @{@"profileImageView": self.profileImageView};
-
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[profileImageView(<=150@750)]"
-                                                                                    options:0
-                                                                                    metrics:nil
-                                                                                      views:views]];
-
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[profileImageView(<=150@750)]"
-                                                                                    options:0
-                                                                                    metrics:nil
-                                                                                      views:views]];
+    [self.profileImageView.heightAnchor constraintEqualToConstant:150.f].active = YES;
+    [self.profileImageView.widthAnchor constraintEqualToConstant:150.f].active = YES;
 }
 
 @end

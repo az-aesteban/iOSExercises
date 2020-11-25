@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ProfileViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,15 +17,16 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController"
-                                                                                           bundle:[NSBundle mainBundle]];
+    self.profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController"
+                                                                         bundle:[NSBundle mainBundle]];
 
-    self.window.rootViewController = profileViewController;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.profileViewController];
+    [self.window setRootViewController: navigationController];
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 

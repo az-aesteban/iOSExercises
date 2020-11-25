@@ -12,8 +12,9 @@
 @implementation LocaleManager
 
 - (NSString *)languageFromRegion {
+    NSLog(@"%@", [[NSLocale currentLocale] countryCode]);
     NSString *countryCode = [[NSLocale currentLocale] countryCode];
-    NSString *language;
+    NSString *language = nil;
 
     if (!countryCode) {
         NSAssert(NO, @"LocaleManager: No country code found for current locale.");
