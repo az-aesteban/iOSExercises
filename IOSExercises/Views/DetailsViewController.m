@@ -8,6 +8,7 @@
 
 #import "DetailsViewController.h"
 #import "EXRColor.h"
+#import "EXRPerson.h"
 
 static NSString *kBirthdayDateFormat = @"MMMM d";
 
@@ -32,7 +33,7 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupAvailableColors];
-    [self setupDefaultValue];
+    [self setupInputFields];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -224,6 +225,7 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
     [button addTarget:self
                action:@selector(didChooseColor:)
      forControlEvents:UIControlEventTouchUpInside];
+    button.tintColor = aColor.uiColor;
     return button;
 }
 
@@ -260,12 +262,13 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 
 #pragma mark - Helper Methods
 
-- (void)setupDefaultValue {
+- (void)setupInputFields {
     [self.colorButton setTitle:@"Black"
                       forState:UIControlStateNormal];
     NSDate *defaultDate = [NSDate dateWithTimeIntervalSince1970:0];
     [self.birthdayButton setTitle:[[self birthdayFormatter] stringFromDate:defaultDate]
                          forState:UIControlStateNormal];
+    self.navigationController.title = @"Hello, hello!";
 }
 
 -(NSDateFormatter *)birthdayFormatter {
@@ -275,7 +278,6 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 }
 
 - (void)setBirthdayWithDate:(NSDate *)aDate {
-    // to be retrieved from date picker
     NSDateFormatter *dateFormatter = [self birthdayFormatter];
     [self.birthdayButton setTitle:[dateFormatter stringFromDate:aDate]
                          forState:UIControlStateNormal];
@@ -292,7 +294,7 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 }
 
 - (void)setupAvailableColors {
-    _availableColorOptions = [NSArray arrayWithObjects:[EXRColor colorNamed:@"Blue"], [EXRColor colorNamed:@"Red"], [EXRColor colorNamed:@"Black"], nil];
+    _availableColorOptions = [NSArray arrayWithObjects:[EXRColor colorNamed:@"Blue"], [EXRColor colorNamed:@"Pink"], [EXRColor colorNamed:@"Yellow"], nil];
 }
 
 - (void)setupRightBarButtonItem {

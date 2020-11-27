@@ -12,7 +12,7 @@
 @implementation LocaleManager
 
 - (NSString *)languageFromRegion {
-    NSLog(@"%@", [[NSLocale currentLocale] countryCode]);
+    NSLog(@"LocaleManager: Country Code: %@", [[NSLocale currentLocale] countryCode]);
     NSString *countryCode = [[NSLocale currentLocale] countryCode];
     NSString *language = nil;
 

@@ -17,6 +17,7 @@
 - (instancetype)initColorWithName:(NSString *)aColorName {
     self = [super init];
     if (self) {
+        self.uiColor = [UIColor colorNamed:aColorName];
         self.colorName = aColorName;
     }
     return self;

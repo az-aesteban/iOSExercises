@@ -26,7 +26,7 @@
                 <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT" userLabel="Detail View">
                     <rect key="frame" x="0.0" y="0.0" width="834" height="1174"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="Placeholder Profile Image" translatesAutoresizingMaskIntoConstraints="NO" id="N3h-By-dZa">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="Mocha-DP" translatesAutoresizingMaskIntoConstraints="NO" id="N3h-By-dZa">
                             <rect key="frame" x="342" y="512" width="150" height="150"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Hello, hello!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6V-kQ-Wv1" userLabel="Name Label">
@@ -74,6 +74,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Placeholder Profile Image" width="150" height="150"/>
+        <image name="Mocha-DP" width="150" height="150"/>
     </resources>
 </document>

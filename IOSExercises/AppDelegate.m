@@ -7,11 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "ProfileViewController.h"
+#import "ProfilesTableViewController.h"
 
 @interface AppDelegate ()
 
-@property (strong, nonatomic) ProfileViewController *profileViewController;
+@property (strong, nonatomic) ProfilesTableViewController *profilesTableViewController;
 
 @end
 
@@ -20,10 +20,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    self.profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController"
+    self.profilesTableViewController = [[ProfilesTableViewController alloc] initWithNibName:@"ProfilesTableViewController"
                                                                          bundle:[NSBundle mainBundle]];
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.profileViewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.profilesTableViewController];
     [self.window setRootViewController: navigationController];
     [self.window makeKeyAndVisible];
 

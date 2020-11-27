@@ -13,11 +13,20 @@
 		6B643E18254DB223005D74DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B643E16254DB223005D74DF /* LaunchScreen.storyboard */; };
 		6B643E1B254DB223005D74DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B643E1A254DB223005D74DF /* main.m */; };
 		6B643E33254DBF40005D74DF /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B643E31254DBF40005D74DF /* ProfileViewController.m */; };
+		6B73B5AF256FA94E00199A2E /* latte-photo@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B73B5AC256FA94E00199A2E /* latte-photo@3x.jpg */; };
+		6B73B5B1256FA94E00199A2E /* latte-photo@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B73B5AE256FA94E00199A2E /* latte-photo@2x.jpg */; };
+		6B73B5B3256FA99400199A2E /* latte-photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B73B5B2256FA99400199A2E /* latte-photo.jpg */; };
+		6B73B5B6256FBE7D00199A2E /* EXRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B73B5B5256FBE7D00199A2E /* EXRColor.m */; };
+		6B73B5BC256FC42000199A2E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B73B5BB256FC42000199A2E /* Colors.xcassets */; };
 		6B743D1C255543330071B7D7 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B743D1A255543330071B7D7 /* DetailsViewController.m */; };
 		6B83B0D4256E2BB7009C2509 /* placeholder-person.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0D1256E2BB7009C2509 /* placeholder-person.jpg */; };
 		6B83B0D5256E2BB7009C2509 /* placeholder-person@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0D2256E2BB7009C2509 /* placeholder-person@3x.jpg */; };
 		6B83B0D6256E2BB7009C2509 /* placeholder-person@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0D3256E2BB7009C2509 /* placeholder-person@2x.jpg */; };
-		6B8AABB6256CEF92007507C8 /* EXRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AABB5256CEF92007507C8 /* EXRColor.m */; };
+		6B83B0E3256EEB70009C2509 /* EXRPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83B0E2256EEB70009C2509 /* EXRPerson.m */; };
+		6B83B0E7256F5474009C2509 /* ProfilesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83B0E5256F5474009C2509 /* ProfilesTableViewController.m */; };
+		6B83B0E8256F5474009C2509 /* ProfilesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0E6256F5474009C2509 /* ProfilesTableViewController.xib */; };
+		6B83B0EC256F5CE7009C2509 /* ProfilesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B83B0EA256F5CE7009C2509 /* ProfilesTableViewCell.m */; };
+		6B83B0ED256F5CE7009C2509 /* ProfilesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0EB256F5CE7009C2509 /* ProfilesTableViewCell.xib */; };
 		6BA7F8182550730300114431 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA7F81A2550730300114431 /* ProfileViewController.xib */; };
 		6BD77D54255E239800861ECE /* DetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BD77D56255E239800861ECE /* DetailsViewController.xib */; };
 		6BE65C9325526A3000EC250D /* LocaleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BE65C9225526A3000EC250D /* LocaleManager.m */; };
@@ -34,13 +43,25 @@
 		6B643E1A254DB223005D74DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6B643E30254DBF40005D74DF /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		6B643E31254DBF40005D74DF /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		6B73B5AC256FA94E00199A2E /* latte-photo@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "latte-photo@3x.jpg"; sourceTree = "<group>"; };
+		6B73B5AE256FA94E00199A2E /* latte-photo@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "latte-photo@2x.jpg"; sourceTree = "<group>"; };
+		6B73B5B2256FA99400199A2E /* latte-photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "latte-photo.jpg"; sourceTree = "<group>"; };
+		6B73B5B4256FBE7D00199A2E /* EXRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXRColor.h; sourceTree = "<group>"; };
+		6B73B5B5256FBE7D00199A2E /* EXRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXRColor.m; sourceTree = "<group>"; };
+		6B73B5BB256FC42000199A2E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		6B743D19255543330071B7D7 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		6B743D1A255543330071B7D7 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		6B83B0D1256E2BB7009C2509 /* placeholder-person.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-person.jpg"; sourceTree = "<group>"; };
 		6B83B0D2256E2BB7009C2509 /* placeholder-person@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-person@3x.jpg"; sourceTree = "<group>"; };
 		6B83B0D3256E2BB7009C2509 /* placeholder-person@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-person@2x.jpg"; sourceTree = "<group>"; };
-		6B8AABB4256CEF92007507C8 /* EXRColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXRColor.h; sourceTree = "<group>"; };
-		6B8AABB5256CEF92007507C8 /* EXRColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXRColor.m; sourceTree = "<group>"; };
+		6B83B0E1256EEB70009C2509 /* EXRPerson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXRPerson.h; sourceTree = "<group>"; };
+		6B83B0E2256EEB70009C2509 /* EXRPerson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXRPerson.m; sourceTree = "<group>"; };
+		6B83B0E4256F5474009C2509 /* ProfilesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilesTableViewController.h; sourceTree = "<group>"; };
+		6B83B0E5256F5474009C2509 /* ProfilesTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfilesTableViewController.m; sourceTree = "<group>"; };
+		6B83B0E6256F5474009C2509 /* ProfilesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilesTableViewController.xib; sourceTree = "<group>"; };
+		6B83B0E9256F5CE7009C2509 /* ProfilesTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfilesTableViewCell.h; sourceTree = "<group>"; };
+		6B83B0EA256F5CE7009C2509 /* ProfilesTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfilesTableViewCell.m; sourceTree = "<group>"; };
+		6B83B0EB256F5CE7009C2509 /* ProfilesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilesTableViewCell.xib; sourceTree = "<group>"; };
 		6B8D1D0A256CC61000CEA7A0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/DetailsViewController.strings; sourceTree = "<group>"; };
 		6BA7870A2551459000BBE3A8 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ProfileViewController.strings; sourceTree = "<group>"; };
 		6BA7F8192550730300114431 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ProfileViewController.xib; sourceTree = "<group>"; };
@@ -93,6 +114,7 @@
 				6B643E19254DB223005D74DF /* Info.plist */,
 				6B643E1A254DB223005D74DF /* main.m */,
 				6B643E11254DB221005D74DF /* IOSExercises.xcdatamodeld */,
+				6B73B5BB256FC42000199A2E /* Colors.xcassets */,
 			);
 			path = IOSExercises;
 			sourceTree = "<group>";
@@ -100,6 +122,9 @@
 		6B643E22254DB4FF005D74DF /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6B73B5B2256FA99400199A2E /* latte-photo.jpg */,
+				6B73B5AE256FA94E00199A2E /* latte-photo@2x.jpg */,
+				6B73B5AC256FA94E00199A2E /* latte-photo@3x.jpg */,
 				6B83B0D1256E2BB7009C2509 /* placeholder-person.jpg */,
 				6B83B0D3256E2BB7009C2509 /* placeholder-person@2x.jpg */,
 				6B83B0D2256E2BB7009C2509 /* placeholder-person@3x.jpg */,
@@ -116,6 +141,12 @@
 				6B743D19255543330071B7D7 /* DetailsViewController.h */,
 				6B743D1A255543330071B7D7 /* DetailsViewController.m */,
 				6BD77D56255E239800861ECE /* DetailsViewController.xib */,
+				6B83B0E4256F5474009C2509 /* ProfilesTableViewController.h */,
+				6B83B0E5256F5474009C2509 /* ProfilesTableViewController.m */,
+				6B83B0E6256F5474009C2509 /* ProfilesTableViewController.xib */,
+				6B83B0E9256F5CE7009C2509 /* ProfilesTableViewCell.h */,
+				6B83B0EA256F5CE7009C2509 /* ProfilesTableViewCell.m */,
+				6B83B0EB256F5CE7009C2509 /* ProfilesTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -123,10 +154,12 @@
 		6BE65C90255269EB00EC250D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6B73B5B4256FBE7D00199A2E /* EXRColor.h */,
+				6B73B5B5256FBE7D00199A2E /* EXRColor.m */,
 				6BE65C9225526A3000EC250D /* LocaleManager.m */,
 				6BE65C9425526A4C00EC250D /* LocaleManager.h */,
-				6B8AABB4256CEF92007507C8 /* EXRColor.h */,
-				6B8AABB5256CEF92007507C8 /* EXRColor.m */,
+				6B83B0E1256EEB70009C2509 /* EXRPerson.h */,
+				6B83B0E2256EEB70009C2509 /* EXRPerson.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -194,11 +227,17 @@
 			files = (
 				6B643E18254DB223005D74DF /* LaunchScreen.storyboard in Resources */,
 				6B83B0D6256E2BB7009C2509 /* placeholder-person@2x.jpg in Resources */,
+				6B73B5BC256FC42000199A2E /* Colors.xcassets in Resources */,
+				6B83B0ED256F5CE7009C2509 /* ProfilesTableViewCell.xib in Resources */,
+				6B73B5B3256FA99400199A2E /* latte-photo.jpg in Resources */,
 				6B643E15254DB223005D74DF /* Assets.xcassets in Resources */,
+				6B73B5B1256FA94E00199A2E /* latte-photo@2x.jpg in Resources */,
+				6B83B0E8256F5474009C2509 /* ProfilesTableViewController.xib in Resources */,
 				6B83B0D5256E2BB7009C2509 /* placeholder-person@3x.jpg in Resources */,
 				6B83B0D4256E2BB7009C2509 /* placeholder-person.jpg in Resources */,
 				6BD77D54255E239800861ECE /* DetailsViewController.xib in Resources */,
 				6BA7F8182550730300114431 /* ProfileViewController.xib in Resources */,
+				6B73B5AF256FA94E00199A2E /* latte-photo@3x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,12 +249,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B643E0A254DB221005D74DF /* AppDelegate.m in Sources */,
-				6B8AABB6256CEF92007507C8 /* EXRColor.m in Sources */,
+				6B73B5B6256FBE7D00199A2E /* EXRColor.m in Sources */,
+				6B83B0E3256EEB70009C2509 /* EXRPerson.m in Sources */,
 				6BE65C9325526A3000EC250D /* LocaleManager.m in Sources */,
 				6B643E1B254DB223005D74DF /* main.m in Sources */,
+				6B83B0E7256F5474009C2509 /* ProfilesTableViewController.m in Sources */,
 				6B743D1C255543330071B7D7 /* DetailsViewController.m in Sources */,
 				6B643E33254DBF40005D74DF /* ProfileViewController.m in Sources */,
 				6B643E13254DB221005D74DF /* IOSExercises.xcdatamodeld in Sources */,
+				6B83B0EC256F5CE7009C2509 /* ProfilesTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

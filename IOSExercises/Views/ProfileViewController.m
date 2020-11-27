@@ -8,7 +8,6 @@
 
 #import "ProfileViewController.h"
 #import "DetailsViewController.h"
-#import "EXRColor.h"
 
 const CGFloat iPhoneProfileImageWidth = 150.f;
 const CGFloat iPhoneProfileImageHeight = 150.f;
