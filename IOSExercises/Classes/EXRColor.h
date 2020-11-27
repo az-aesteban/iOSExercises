@@ -11,13 +11,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, EXRSupportedColor) {
+  EXRSupportedColorRed,
+  EXRSupportedColorBlue,
+  EXRSupportedColorBlack
+};
+
 @interface EXRColor : NSObject
 
 @property (strong, readwrite, nonatomic) UIColor *uiColor;
 
 @property (strong, readwrite, nonatomic) NSString *colorName;
 
-+ (instancetype)colorNamed:(NSString *)aColorName;
++ (instancetype)supportedColor:(EXRSupportedColor)aSuppportedColor;
 
 @end
 

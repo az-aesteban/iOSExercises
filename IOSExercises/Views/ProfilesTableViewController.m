@@ -13,10 +13,6 @@
 
 static NSString *kCellIdentifier = @"profileViewCell";
 
-@interface ProfilesTableViewController ()
-
-@end
-
 @implementation ProfilesTableViewController {
     NSArray<EXRPerson *> *_persons;
 }
@@ -120,14 +116,14 @@ static NSString *kCellIdentifier = @"profileViewCell";
                                                                andDay:05
                                                               andYear:2018]
                                      andImage:@"Mocha-DP"
-                                   likesColor:[EXRColor colorNamed:@"Blue"]];
+                                   likesColor:[EXRColor supportedColor:EXRSupportedColorBlue]];
     
     EXRPerson *latte = [EXRPerson personNamed:@"Sugarcub Latte"
                                  withBirthday:[self birthdayFromMonth:11
                                                                andDay:27
                                                               andYear:2018]
                                      andImage:@"Latte-DP"
-                                   likesColor:[EXRColor colorNamed:@"Pink"]];
+                                   likesColor:[EXRColor supportedColor:EXRSupportedColorRed]];
 
     _persons = [NSArray arrayWithObjects:latte, mocha, nil];
 }

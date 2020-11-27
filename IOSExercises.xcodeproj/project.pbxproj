@@ -17,7 +17,7 @@
 		6B73B5B1256FA94E00199A2E /* latte-photo@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B73B5AE256FA94E00199A2E /* latte-photo@2x.jpg */; };
 		6B73B5B3256FA99400199A2E /* latte-photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B73B5B2256FA99400199A2E /* latte-photo.jpg */; };
 		6B73B5B6256FBE7D00199A2E /* EXRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B73B5B5256FBE7D00199A2E /* EXRColor.m */; };
-		6B73B5BC256FC42000199A2E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B73B5BB256FC42000199A2E /* Colors.xcassets */; };
+		6B73B5C32570F1D600199A2E /* ColorsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B73B5C12570F1D600199A2E /* ColorsTableViewController.m */; };
 		6B743D1C255543330071B7D7 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B743D1A255543330071B7D7 /* DetailsViewController.m */; };
 		6B83B0D4256E2BB7009C2509 /* placeholder-person.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0D1256E2BB7009C2509 /* placeholder-person.jpg */; };
 		6B83B0D5256E2BB7009C2509 /* placeholder-person@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6B83B0D2256E2BB7009C2509 /* placeholder-person@3x.jpg */; };
@@ -48,7 +48,8 @@
 		6B73B5B2256FA99400199A2E /* latte-photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "latte-photo.jpg"; sourceTree = "<group>"; };
 		6B73B5B4256FBE7D00199A2E /* EXRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXRColor.h; sourceTree = "<group>"; };
 		6B73B5B5256FBE7D00199A2E /* EXRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXRColor.m; sourceTree = "<group>"; };
-		6B73B5BB256FC42000199A2E /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		6B73B5C02570F1D600199A2E /* ColorsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorsTableViewController.h; sourceTree = "<group>"; };
+		6B73B5C12570F1D600199A2E /* ColorsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorsTableViewController.m; sourceTree = "<group>"; };
 		6B743D19255543330071B7D7 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		6B743D1A255543330071B7D7 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		6B83B0D1256E2BB7009C2509 /* placeholder-person.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-person.jpg"; sourceTree = "<group>"; };
@@ -114,7 +115,6 @@
 				6B643E19254DB223005D74DF /* Info.plist */,
 				6B643E1A254DB223005D74DF /* main.m */,
 				6B643E11254DB221005D74DF /* IOSExercises.xcdatamodeld */,
-				6B73B5BB256FC42000199A2E /* Colors.xcassets */,
 			);
 			path = IOSExercises;
 			sourceTree = "<group>";
@@ -147,6 +147,8 @@
 				6B83B0E9256F5CE7009C2509 /* ProfilesTableViewCell.h */,
 				6B83B0EA256F5CE7009C2509 /* ProfilesTableViewCell.m */,
 				6B83B0EB256F5CE7009C2509 /* ProfilesTableViewCell.xib */,
+				6B73B5C02570F1D600199A2E /* ColorsTableViewController.h */,
+				6B73B5C12570F1D600199A2E /* ColorsTableViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -227,7 +229,6 @@
 			files = (
 				6B643E18254DB223005D74DF /* LaunchScreen.storyboard in Resources */,
 				6B83B0D6256E2BB7009C2509 /* placeholder-person@2x.jpg in Resources */,
-				6B73B5BC256FC42000199A2E /* Colors.xcassets in Resources */,
 				6B83B0ED256F5CE7009C2509 /* ProfilesTableViewCell.xib in Resources */,
 				6B73B5B3256FA99400199A2E /* latte-photo.jpg in Resources */,
 				6B643E15254DB223005D74DF /* Assets.xcassets in Resources */,
@@ -257,6 +258,7 @@
 				6B743D1C255543330071B7D7 /* DetailsViewController.m in Sources */,
 				6B643E33254DBF40005D74DF /* ProfileViewController.m in Sources */,
 				6B643E13254DB221005D74DF /* IOSExercises.xcdatamodeld in Sources */,
+				6B73B5C32570F1D600199A2E /* ColorsTableViewController.m in Sources */,
 				6B83B0EC256F5CE7009C2509 /* ProfilesTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

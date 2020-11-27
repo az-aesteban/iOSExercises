@@ -9,10 +9,11 @@
 #import "DetailsViewController.h"
 #import "EXRColor.h"
 #import "EXRPerson.h"
+#import "ColorsTableViewController.h"
 
 static NSString *kBirthdayDateFormat = @"MMMM d";
 
-@interface DetailsViewController() <UIPopoverPresentationControllerDelegate>
+@interface DetailsViewController() <UIPopoverPresentationControllerDelegate, ColorDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *colorButton;
 
@@ -44,6 +45,7 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 
 
 - (IBAction)didTapColorButton:(id)sender {
+    NSLog(@"DetailsViewController: Color button tapped");
     if (UIUserInterfaceIdiomPhone == [[UIDevice currentDevice] userInterfaceIdiom]) {
         //
         // Display as action sheet
@@ -84,14 +86,6 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
         greeting = @"It's not your birthday";
     }
     [self displayPopoverWithGreeting:greeting];
-}
-
-- (IBAction)didChooseColor:(id)sender {
-    UIButton *button = (UIButton *)sender;
-    NSString *color = button.currentTitle;
-    NSLog(@"DetailsViewController: User chose %@", color);
-    [self.colorButton setTitle:color
-                      forState:UIControlStateNormal];
 }
 
 - (IBAction)setBirthday:(id)sender {
@@ -217,38 +211,11 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
                      completion:nil];
 }
 
-- (UIButton *)createButtonForColor:(EXRColor *)aColor {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    button.translatesAutoresizingMaskIntoConstraints = NO;
-    [button setTitle:aColor.colorName
-            forState:UIControlStateNormal];
-    [button addTarget:self
-               action:@selector(didChooseColor:)
-     forControlEvents:UIControlEventTouchUpInside];
-    button.tintColor = aColor.uiColor;
-    return button;
-}
-
-- (void)populateColorPickerView:(UIView *)aView {
-    for (EXRColor *color in _availableColorOptions) {
-        UIButton *button = [self createButtonForColor:color];
-
-        UIButton *lastButton = aView.subviews.count ? aView.subviews.lastObject: nil;
-        [aView addSubview:button];
-
-        [button.centerXAnchor constraintEqualToAnchor:aView.centerXAnchor].active = YES;
-
-        [button.centerYAnchor constraintEqualToAnchor:lastButton ? lastButton.bottomAnchor : aView.safeAreaLayoutGuide.topAnchor
-                                             constant: 25.f].active = YES;
-    }
-}
-
 - (void)displayPopoverColorPicker {
-    UIViewController *controller = [[UIViewController alloc] init];
-    controller.view = [[UIView alloc] init];
+    ColorsTableViewController *controller = [[ColorsTableViewController alloc] init];
     [controller setPreferredContentSize:CGSizeMake(200.f, 125.f)];
-
-    [self populateColorPickerView:controller.view];
+    [controller setupAvailableColors:_availableColorOptions];
+    controller.delegate = self;
     [controller setModalPresentationStyle:UIModalPresentationPopover];
     [self presentViewController:controller
                        animated:YES
@@ -294,13 +261,18 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 }
 
 - (void)setupAvailableColors {
-    _availableColorOptions = [NSArray arrayWithObjects:[EXRColor colorNamed:@"Blue"], [EXRColor colorNamed:@"Pink"], [EXRColor colorNamed:@"Yellow"], nil];
+    _availableColorOptions = [NSArray arrayWithObjects:[EXRColor supportedColor:EXRSupportedColorBlue], [EXRColor supportedColor:EXRSupportedColorRed], [EXRColor supportedColor:EXRSupportedColorBlack], nil];
 }
 
 - (void)setupRightBarButtonItem {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                                            target:self
                                                                                            action:@selector(saveProfile:)];
+}
+
+-(void)sendSelectedColorName:(NSString *)colorName {
+    [self.colorButton setTitle:colorName
+                      forState:UIControlStateNormal];
 }
 
 @end

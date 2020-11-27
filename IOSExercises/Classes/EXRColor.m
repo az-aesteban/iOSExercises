@@ -10,15 +10,29 @@
 
 @implementation EXRColor
 
-+ (instancetype)colorNamed:(NSString *)aColorName {
-    return [[EXRColor alloc] initColorWithName:aColorName];
++ (instancetype)supportedColor:(EXRSupportedColor)aSuppportedColor {
+    return [[EXRColor alloc] initWithSupportedColor:aSuppportedColor];
 }
 
-- (instancetype)initColorWithName:(NSString *)aColorName {
+- (instancetype)initWithSupportedColor:(EXRSupportedColor)aSuppportedColor {
     self = [super init];
     if (self) {
-        self.uiColor = [UIColor colorNamed:aColorName];
-        self.colorName = aColorName;
+        switch (aSuppportedColor) {
+            case EXRSupportedColorBlue:
+                self.uiColor = [UIColor blueColor];
+                self.colorName = @"Blue";
+                break;
+            case EXRSupportedColorRed:
+                self.uiColor = [UIColor redColor];
+                self.colorName = @"Red";
+                break;
+            case EXRSupportedColorBlack:
+                self.uiColor = [UIColor blackColor];
+                self.colorName = @"Black";
+                break;
+            default:
+                break;
+        }
     }
     return self;
 }

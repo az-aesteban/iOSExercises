@@ -8,7 +8,6 @@
 
 #import "ProfilesTableViewCell.h"
 
-
 @implementation ProfilesTableViewCell
 
 - (void)awakeFromNib {
