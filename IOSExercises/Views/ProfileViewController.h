@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Person+CoreDataClass.h"
+#import "EXRCoreDataController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfileViewController : UIViewController
+
+@property(nonatomic, strong) Person *person;
+
+@property(nonatomic, strong) EXRCoreDataController *dataController;
+
 
 @end
 

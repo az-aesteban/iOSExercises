@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EXRPerson.h"
+#import "Person+CoreDataClass.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,9 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) IBOutlet UILabel *birthdayGreetingLabel;
 
-@property (strong, nonatomic) EXRPerson *person;
+@property (strong, nonatomic) Person *person;
 
-- (void)setupConstraints;
+- (void)setupProfileData;
+
+- (void)setupBirthdayConstraints;
+
+- (void)deactivateBirthdayConstraints;
 
 @end
 

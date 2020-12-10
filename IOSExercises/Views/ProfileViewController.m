@@ -16,7 +16,7 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 
-@property (strong, nonatomic) IBOutlet UILabel *nameLabelButton;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *nameLabelPortraitConstraints;
 
@@ -41,13 +41,14 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
 
     [self setupConstraints:orientation];
     [self setupStyles];
+    [self setupPersonData];
 }
 
 #pragma mark - Setup Style Methods
 
 - (void)setupStyles {
-    self.nameLabelButton.layer.borderColor = [UIColor blackColor].CGColor;
-    self.nameLabelButton.layer.borderWidth = 0.5f;
+    self.nameLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    self.nameLabel.layer.borderWidth = 0.5f;
 
     self.profileImageView.layer.borderColor = [UIColor redColor].CGColor;
     self.profileImageView.layer.borderWidth = 0.5f;
@@ -60,7 +61,8 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
         self.detailsViewController = [[DetailsViewController alloc] initWithNibName:@"DetailsViewController"
                                                                              bundle:[NSBundle mainBundle]];
     }
-    self.detailsViewController.title = @"Hello, hello!";
+    self.detailsViewController.person = self.person;
+    self.detailsViewController.dataController = self.dataController;
     [self.navigationController pushViewController:self.detailsViewController
                                          animated:YES];
 }
@@ -101,6 +103,13 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
 - (void)activateIPhoneConstraints {
     [self.profileImageView.heightAnchor constraintEqualToConstant:150.f].active = YES;
     [self.profileImageView.widthAnchor constraintEqualToConstant:150.f].active = YES;
+}
+
+#pragma mark - Data Methods
+
+- (void)setupPersonData {
+    self.profileImageView.image = [UIImage imageNamed:self.person.image];
+    self.nameLabel.text = self.person.name;
 }
 
 @end

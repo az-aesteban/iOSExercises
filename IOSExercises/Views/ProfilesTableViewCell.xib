@@ -110,10 +110,10 @@ Happy birthday to you Happy birthday, happy birthday Happy birthday to you!<
                         <exclude reference="baR-yh-9td"/>
                     </mask>
                     <mask key="constraints">
-                        <exclude reference="OdR-h5-2el"/>
-                        <exclude reference="Ust-tg-am4"/>
                         <exclude reference="9nP-wm-be3"/>
                         <exclude reference="QIQ-kL-Yh7"/>
+                        <exclude reference="OdR-h5-2el"/>
+                        <exclude reference="Ust-tg-am4"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

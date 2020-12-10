@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, EXRSupportedColor) {
   EXRSupportedColorRed,
   EXRSupportedColorBlue,
-  EXRSupportedColorBlack
+  EXRSupportedColorBlack,
+  EXRSupportedColorUnsupported
 };
 
 @interface EXRColor : NSObject
@@ -24,6 +25,10 @@ typedef NS_ENUM(NSInteger, EXRSupportedColor) {
 @property (strong, readwrite, nonatomic) NSString *colorName;
 
 + (instancetype)supportedColor:(EXRSupportedColor)aSuppportedColor;
+
++ (EXRSupportedColor)colorWithName:(NSString *)colorName;
+
+- (int64_t) colorCode;
 
 @end
 

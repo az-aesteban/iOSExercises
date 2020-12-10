@@ -8,7 +8,6 @@
 
 #import "DetailsViewController.h"
 #import "EXRColor.h"
-#import "EXRPerson.h"
 #import "ColorsTableViewController.h"
 
 static NSString *kBirthdayDateFormat = @"MMMM d";
@@ -71,7 +70,7 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
     NSDate *birthdate = [dateFormatter dateFromString:self.birthdayButton.currentTitle];
 
     NSDateComponents *birthdayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth
-                                                                      fromDate:birthdate];
+                                                                          fromDate:birthdate];
     NSDateComponents *todayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth
                                                                        fromDate:[NSDate date]];
 
@@ -97,9 +96,19 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
                                                    completion:nil];
 }
 
-- (IBAction)saveProfile:(id)sender {
-    NSLog(@"DetailsViewController: Changes have not been saved");
-    [self promptErrorWithMessage:@"Changes have not been saved"];
+- (IBAction)didTapSaveButton:(id)sender {
+    NSLog(@"DetailsViewController: Tapped Save Button");
+    // Ignore: From Exercise 3
+    // NSLog(@"DetailsViewController: Changes have not been saved");
+    // [self promptErrorWithMessage:@"Changes have not been saved"];
+    NSDateFormatter *dateFormatter = [self birthdayFormatter];
+    NSDate *birthdate = [dateFormatter dateFromString:self.birthdayButton.currentTitle];
+
+    self.person.birthday = birthdate;
+    self.person.color = [EXRColor colorWithName:self.colorButton.currentTitle];
+    [self.dataController saveContext];
+
+    [self promptSuccessWithMessage:@"Changes have been saved"];
 }
 
 #pragma mark - Popover View Controller Methods
@@ -191,6 +200,21 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
                      completion:nil];
 }
 
+
+- (void)promptSuccessWithMessage:(NSString *)aMessage {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success"
+                                                                   message:aMessage
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+ 
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    [alert addAction:defaultAction];
+    [self presentViewController:alert
+                       animated:YES
+                     completion:nil];
+}
+
 - (void)displayColorPickerActionSheet {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Choose a color"
                                                                    message:@"Choose from the available colors"
@@ -230,12 +254,11 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 #pragma mark - Helper Methods
 
 - (void)setupInputFields {
-    [self.colorButton setTitle:@"Black"
+    [self.colorButton setTitle:[self colorDisplayNameofSupportedColor:self.person.color]
                       forState:UIControlStateNormal];
-    NSDate *defaultDate = [NSDate dateWithTimeIntervalSince1970:0];
-    [self.birthdayButton setTitle:[[self birthdayFormatter] stringFromDate:defaultDate]
+    [self.birthdayButton setTitle:[[self birthdayFormatter] stringFromDate:self.person.birthday]
                          forState:UIControlStateNormal];
-    self.navigationController.title = @"Hello, hello!";
+    self.title = self.person.name;
 }
 
 -(NSDateFormatter *)birthdayFormatter {
@@ -261,18 +284,26 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 }
 
 - (void)setupAvailableColors {
-    _availableColorOptions = [NSArray arrayWithObjects:[EXRColor supportedColor:EXRSupportedColorBlue], [EXRColor supportedColor:EXRSupportedColorRed], [EXRColor supportedColor:EXRSupportedColorBlack], nil];
+    NSMutableArray<EXRColor *> *supportedColors = [[NSMutableArray alloc] init];
+    for (int exrSupportedColor = 0; exrSupportedColor < EXRSupportedColorUnsupported; exrSupportedColor++) {
+        [supportedColors addObject:[EXRColor supportedColor:exrSupportedColor]];
+    }
+    _availableColorOptions = supportedColors;
 }
 
 - (void)setupRightBarButtonItem {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                                            target:self
-                                                                                           action:@selector(saveProfile:)];
+                                                                                           action:@selector(didTapSaveButton:)];
 }
 
 -(void)sendSelectedColorName:(NSString *)colorName {
     [self.colorButton setTitle:colorName
                       forState:UIControlStateNormal];
+}
+
+- (NSString *)colorDisplayNameofSupportedColor:(EXRSupportedColor)supportedColor {
+    return [EXRColor supportedColor:supportedColor].colorName;
 }
 
 @end

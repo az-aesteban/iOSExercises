@@ -8,7 +8,11 @@
 
 #import "EXRColor.h"
 
-@implementation EXRColor
+#import "Person+CoreDataClass.h"
+
+@implementation EXRColor {
+    int64_t _colorCode;
+}
 
 + (instancetype)supportedColor:(EXRSupportedColor)aSuppportedColor {
     return [[EXRColor alloc] initWithSupportedColor:aSuppportedColor];
@@ -33,8 +37,25 @@
             default:
                 break;
         }
+        _colorCode = aSuppportedColor;
     }
     return self;
+}
+
++ (EXRSupportedColor)colorWithName:(NSString *)colorName {
+    EXRSupportedColor supportedColor = EXRSupportedColorUnsupported;
+    if ([colorName isEqualToString:@"Blue"]) {
+        supportedColor = EXRSupportedColorBlue;
+    } else if ([colorName isEqualToString:@"Red"]) {
+        supportedColor = EXRSupportedColorRed;
+    } else if ([colorName isEqualToString:@"Black"]) {
+        supportedColor = EXRSupportedColorBlack;
+    }
+    return supportedColor;
+}
+
+- (int64_t) colorCode {
+    return _colorCode;
 }
 
 @end

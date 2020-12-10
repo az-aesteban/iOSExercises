@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController">
             <connections>
-                <outlet property="nameLabelButton" destination="u6V-kQ-Wv1" id="f2p-ua-eA8"/>
+                <outlet property="nameLabel" destination="u6V-kQ-Wv1" id="f2p-ua-eA8"/>
                 <outlet property="profileImageView" destination="N3h-By-dZa" id="lPJ-9s-6I3"/>
                 <outlet property="view" destination="6b1-IH-XCx" id="aTW-hD-guP"/>
                 <outletCollection property="nameLabelLandscapeConstraints" destination="OF9-cZ-4nf" id="keK-jp-Ndi"/>

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EXRCoreDataController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfilesTableViewController : UITableViewController
+
+@property(nonatomic, strong) EXRCoreDataController *dataController;
 
 @end
 

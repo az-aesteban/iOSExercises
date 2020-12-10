@@ -6,22 +6,28 @@
 //  Copyright © 2020 Arnold Joseph Caesar Esteban. All rights reserved.
 //
 
-#import "EXRPerson.h"
 #import "ProfileViewController.h"
 #import "ProfilesTableViewCell.h"
 #import "ProfilesTableViewController.h"
+#import "Person+CoreDataClass.h"
 
 static NSString *kCellIdentifier = @"profileViewCell";
 
+@interface ProfilesTableViewController ()
+
+@property (strong, nonatomic) UISwitch *birthdayListSwitch;
+
+@end
+
 @implementation ProfilesTableViewController {
-    NSArray<EXRPerson *> *_persons;
+    NSArray<Person *> *_persons;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupNavigationFilterButtons];
+    [self setupCellHeight];
     [self setupPersons];
-    self.tableView.estimatedRowHeight = 44.f;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 #pragma mark - Table view data source
@@ -43,12 +49,18 @@ static NSString *kCellIdentifier = @"profileViewCell";
     ProfilesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     if (!cell) {
         [tableView registerNib:[UINib nibWithNibName:@"ProfilesTableViewCell"
-                                           bundle:[NSBundle mainBundle]]
+                                              bundle:[NSBundle mainBundle]]
         forCellReuseIdentifier:kCellIdentifier];
         cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     }
     cell.person = [_persons objectAtIndex:indexPath.item];
-    [cell setupConstraints];
+
+    [cell setupProfileData];
+    if ([self isBirthdayTodayOfPerson:cell.person]) {
+        [cell setupBirthdayConstraints];
+    } else {
+        [cell deactivateBirthdayConstraints];
+    }
     return cell;
 }
 
@@ -92,8 +104,10 @@ static NSString *kCellIdentifier = @"profileViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController"
-                                                                                                 bundle:[NSBundle mainBundle]];
-    [_persons objectAtIndex:indexPath.item];
+                                                                                           bundle:[NSBundle mainBundle]];
+    Person *person = [_persons objectAtIndex:indexPath.item];
+    profileViewController.person = person;
+    profileViewController.dataController = self.dataController;
     [self.navigationController pushViewController:profileViewController
                                          animated:YES];
 }
@@ -111,31 +125,89 @@ static NSString *kCellIdentifier = @"profileViewCell";
 #pragma mark - Data initialization Methods
 
 - (void)setupPersons {
-    EXRPerson *mocha = [EXRPerson personNamed:@"Sugarcub Mocha"
-                                 withBirthday:[self birthdayFromMonth:05
-                                                               andDay:05
-                                                              andYear:2018]
-                                     andImage:@"Mocha-DP"
-                                   likesColor:[EXRColor supportedColor:EXRSupportedColorBlue]];
-    
-    EXRPerson *latte = [EXRPerson personNamed:@"Sugarcub Latte"
-                                 withBirthday:[self birthdayFromMonth:11
-                                                               andDay:27
-                                                              andYear:2018]
-                                     andImage:@"Latte-DP"
-                                   likesColor:[EXRColor supportedColor:EXRSupportedColorRed]];
-
-    _persons = [NSArray arrayWithObjects:latte, mocha, nil];
+    _persons = [Person fetchAllPersonsWithContext:self.dataController.managedObjectContext];
 }
 
-- (NSDate *)birthdayFromMonth:(NSInteger)aMonth
-                       andDay:(NSInteger)aDay
-                      andYear:(NSInteger)aYear {
-    NSDateComponents *birthdayComponents = [[NSDateComponents alloc] init];
-    [birthdayComponents setMonth:aMonth];
-    [birthdayComponents setDay:aDay];
-    [birthdayComponents setYear:aYear];
-    return [[NSCalendar currentCalendar] dateFromComponents:birthdayComponents];
+- (NSArray<Person *> *)fetchPersonsWithBirthdayToday {
+
+    NSArray<Person *> *persons = [Person fetchAllPersonsWithContext:self.dataController.managedObjectContext];
+
+    NSPredicate *birthdayPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+
+        Person *fetchedPerson = (Person *) evaluatedObject;
+
+        return [self isBirthdayTodayOfPerson:fetchedPerson];
+    }];
+    return [persons filteredArrayUsingPredicate:birthdayPredicate];
 }
+
+- (BOOL)isBirthdayTodayOfPerson:(Person *)person {
+    NSDateComponents *birthdayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth
+                                                                          fromDate:person.birthday];
+    NSDateComponents *todayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth
+                                                                       fromDate:[NSDate date]];
+    return birthdayComponent.day == todayComponent.day
+        && birthdayComponent.month == todayComponent.month;
+}
+
+
+#pragma mark - Action Handler Methods
+
+- (IBAction)didTapFilterButton:(id)sender {
+    UIButton *filterButton = (UIButton *)sender;
+    NSString *buttonTitle = filterButton.titleLabel.text;
+    NSLog(@"ProfilesTableViewController: %@ Filter Button was tapped", buttonTitle);
+    if ([buttonTitle isEqualToString:@"All"]) {
+        [self setupPersons];
+    } else {
+        _persons = [Person fetchPersonsWithColor:[EXRColor colorWithName:buttonTitle]
+                                     withContext:self.dataController.managedObjectContext];
+    }
+    self.birthdayListSwitch.on = NO;
+    [self.tableView reloadData];
+}
+
+- (void) switchIsChanged:(UISwitch *)paramSender{
+    NSLog(@"ProfilesTableViewController: Switch is tapped");
+    if ([paramSender isOn]){
+        _persons = [self fetchPersonsWithBirthdayToday];
+        NSLog(@"ProfilesTableViewController: Switch is on");
+    } else {
+        [self setupPersons];
+        NSLog(@"ProfilesTableViewController: Switch is off");
+    }
+    [self.tableView reloadData];
+}
+
+#pragma mark - Layout Helper Methods
+
+- (void)setupCellHeight {
+    self.tableView.estimatedRowHeight = 44.f;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+}
+
+- (UIBarButtonItem *)createBarButtonItemWithTitle:(NSString *)aTitle {
+    UIButton *barButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [barButton setTitle:aTitle
+               forState:UIControlStateNormal];
+    [barButton addTarget:self
+                  action:@selector(didTapFilterButton:)
+        forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:barButton];
+}
+
+- (void)setupNavigationFilterButtons {
+    UIBarButtonItem *blackFilterButtonItem = [self createBarButtonItemWithTitle:@"Black"];
+    UIBarButtonItem *allFilterButtonItem = [self createBarButtonItemWithTitle:@"All"];
+
+    self.birthdayListSwitch = [[UISwitch alloc] init];
+    self.birthdayListSwitch.on = NO;
+    [self.birthdayListSwitch addTarget:self
+                     action:@selector(switchIsChanged:)
+           forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithCustomView:self.birthdayListSwitch], blackFilterButtonItem, allFilterButtonItem, nil];
+}
+
+
 
 @end
