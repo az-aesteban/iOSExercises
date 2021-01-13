@@ -8,19 +8,33 @@
 
 #import "ProfilesTableViewCell.h"
 
+@interface ProfilesTableViewCell()
+
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *birthdayAssetViewConstraints;
+
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *birthdayColorViewConstraints;
+
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *birthdayGreetingLabelConstraints;
+
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *defaultConstraints;
+
+@property (strong, nonatomic) IBOutlet UIView *colorView;
+
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
+
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (strong, nonatomic) IBOutlet UIView *assetsView;
+
+@property (strong, nonatomic) IBOutlet UILabel *birthdayGreetingLabel;
+
+@end
+
 @implementation ProfilesTableViewCell
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-}
 
 - (void)setupConstraints {
     self.nameLabel.text = self.person.name;
-    self.profileImageView.image = [UIImage imageNamed:self.person.image];
+    self.profileImageView.image = [UIImage imageNamed:self.person.imageFilepath];
     if ([self.person isBirthdayToday]) {
         [NSLayoutConstraint deactivateConstraints:self.defaultConstraints];
         
@@ -31,7 +45,19 @@
 
         [self.contentView addSubview:self.birthdayGreetingLabel];
         [NSLayoutConstraint activateConstraints:self.birthdayGreetingLabelConstraints];
+    } else {
+        [self deactivateBirthdayConstraints];
     }
+}
+
+- (void)deactivateBirthdayConstraints {
+    [NSLayoutConstraint deactivateConstraints:self.birthdayAssetViewConstraints];
+    [self.colorView removeFromSuperview];
+    [NSLayoutConstraint deactivateConstraints:self.birthdayColorViewConstraints];
+
+    [self.birthdayGreetingLabel removeFromSuperview];
+    [NSLayoutConstraint deactivateConstraints:self.birthdayGreetingLabelConstraints];
+    [NSLayoutConstraint activateConstraints:self.defaultConstraints];
 }
 
 @end

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EXRPerson : NSObject
 
-@property (strong, readwrite, nonatomic) NSString *image;
+@property (strong, readwrite, nonatomic) NSString *imageFilepath;
 
 @property (strong, readwrite, nonatomic) NSString *name;
 
@@ -21,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, readwrite, nonatomic) EXRColor *color;
 
-+ (instancetype)personNamed:(NSString *)aName
-               withBirthday:(NSDate *)aBirthday
-                   andImage:(NSString *)anImage
-                 likesColor:(EXRColor *)aColor;
++ (instancetype)personWithName:(NSString *)aName
+                      birthday:(NSDate *)aBirthday
+                 imageFilepath:(NSString *)anImageFilePath
+                         color:(EXRColor *)aColor;
 
 - (BOOL)isBirthdayToday;
 
