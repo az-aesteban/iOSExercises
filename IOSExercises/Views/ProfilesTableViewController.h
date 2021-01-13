@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfilesTableViewController : UITableViewController
 
-@property(nonatomic, strong) EXRCoreDataController *dataController;
+@property (nonatomic, strong) EXRCoreDataController *dataController;
 
 @end
 

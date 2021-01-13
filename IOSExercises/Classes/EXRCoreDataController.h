@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EXRCoreDataController : NSObject
 
-@property (strong, nonatomic, readonly) NSPersistentContainer *persistentContainer;
+@property(strong, nonatomic, readonly) NSPersistentContainer *persistentContainer;
 
 - (id)initWithCompletionBlock:(void (^)(EXRCoreDataController *))callback;
 

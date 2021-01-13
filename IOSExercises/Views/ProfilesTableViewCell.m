@@ -9,7 +9,7 @@
 #import "ProfilesTableViewCell.h"
 #import "EXRColor.h"
 
-@interface ProfilesTableViewCell()
+@interface ProfilesTableViewCell ()
 
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *birthdayAssetViewConstraints;
 

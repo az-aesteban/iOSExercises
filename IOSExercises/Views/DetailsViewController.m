@@ -10,9 +10,9 @@
 #import "EXRColor.h"
 #import "ColorsTableViewController.h"
 
-static NSString *kBirthdayDateFormat = @"MMMM d";
+static NSString *const kBirthdayDateFormat = @"MMMM d";
 
-@interface DetailsViewController() <UIPopoverPresentationControllerDelegate, ColorDelegate>
+@interface DetailsViewController () <UIPopoverPresentationControllerDelegate, ColorDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *colorButton;
 

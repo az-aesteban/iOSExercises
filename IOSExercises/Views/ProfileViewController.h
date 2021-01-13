@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfileViewController : UIViewController
 
-@property(nonatomic, strong) Person *person;
+@property (nonatomic, strong) Person *person;
 
-@property(nonatomic, strong) EXRCoreDataController *dataController;
+@property (nonatomic, strong) EXRCoreDataController *dataController;
 
 @end
 
