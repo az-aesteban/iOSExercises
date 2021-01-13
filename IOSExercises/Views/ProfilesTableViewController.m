@@ -17,11 +17,11 @@ static NSString *kCellIdentifier = @"profileViewCell";
 
 @property (strong, nonatomic) UISwitch *birthdayListSwitch;
 
+@property (strong, nonatomic) NSArray<Person *> *persons;
+
 @end
 
-@implementation ProfilesTableViewController {
-    NSArray<Person *> *_persons;
-}
+@implementation ProfilesTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +41,7 @@ static NSString *kCellIdentifier = @"profileViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _persons.count;
+    return self.persons.count;
 }
 
 
@@ -53,7 +53,7 @@ static NSString *kCellIdentifier = @"profileViewCell";
         forCellReuseIdentifier:kCellIdentifier];
         cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     }
-    cell.person = [_persons objectAtIndex:indexPath.item];
+    cell.person = [self.persons objectAtIndex:indexPath.item];
 
     [cell setupProfileData];
     if ([self isBirthdayTodayOfPerson:cell.person]) {
@@ -64,68 +64,28 @@ static NSString *kCellIdentifier = @"profileViewCell";
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController"
                                                                                            bundle:[NSBundle mainBundle]];
-    Person *person = [_persons objectAtIndex:indexPath.item];
-    profileViewController.person = person;
-    profileViewController.dataController = self.dataController;
-    [self.navigationController pushViewController:profileViewController
-                                         animated:YES];
-}
 
-/*
-#pragma mark - Navigation
+    if (indexPath.item < self.persons.count) {
+        Person *person = [self.persons objectAtIndex:indexPath.item];
+        profileViewController.person = person;
+        profileViewController.dataController = self.dataController;
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+        [self.navigationController pushViewController:profileViewController
+                                             animated:YES];
+    } else {
+        NSAssert(NO, @"ProfilesTableViewController: Selected row does not match to a profile");
+    }
 }
-*/
 
 #pragma mark - Data initialization Methods
 
 - (void)setupPersons {
-    _persons = [Person fetchAllPersonsWithContext:self.dataController.managedObjectContext];
+    self.persons = [Person fetchAllPersonsWithContext:self.dataController.managedObjectContext];
 }
 
 - (NSArray<Person *> *)fetchPersonsWithBirthdayToday {

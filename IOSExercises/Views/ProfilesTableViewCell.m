@@ -9,17 +9,29 @@
 #import "ProfilesTableViewCell.h"
 #import "EXRColor.h"
 
+@interface ProfilesTableViewCell()
+
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *birthdayAssetViewConstraints;
+
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *birthdayColorViewConstraints;
+
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *birthdayGreetingLabelConstraints;
+
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *defaultConstraints;
+
+@property (strong, nonatomic) IBOutlet UIView *colorView;
+
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
+
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (strong, nonatomic) IBOutlet UIView *assetsView;
+
+@property (strong, nonatomic) IBOutlet UILabel *birthdayGreetingLabel;
+
+@end
+
 @implementation ProfilesTableViewCell
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
-- (void)setSelected:(BOOL)selected
-           animated:(BOOL)animated {
-    [super setSelected:selected
-              animated:animated];
-}
 
 - (void)setupProfileData {
     self.nameLabel.text = self.person.name;

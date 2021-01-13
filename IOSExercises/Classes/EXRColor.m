@@ -19,8 +19,7 @@
 }
 
 - (instancetype)initWithSupportedColor:(EXRSupportedColor)aSuppportedColor {
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
         switch (aSuppportedColor) {
             case EXRSupportedColorBlue:
                 self.uiColor = [UIColor blueColor];
@@ -35,7 +34,7 @@
                 self.colorName = @"Black";
                 break;
             default:
-                break;
+                NSAssert(NO, @"EXRColor: Color not supported.");
         }
         _colorCode = aSuppportedColor;
     }
