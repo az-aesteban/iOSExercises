@@ -11,9 +11,9 @@
 #import "EXRPerson.h"
 #import "ColorsTableViewController.h"
 
-static NSString *kBirthdayDateFormat = @"MMMM d";
+static NSString *const kBirthdayDateFormat = @"MMMM d";
 
-@interface DetailsViewController() <UIPopoverPresentationControllerDelegate, ColorDelegate>
+@interface DetailsViewController () <UIPopoverPresentationControllerDelegate, ColorDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *colorButton;
 
@@ -25,11 +25,11 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 
 @property (strong, nonatomic) UIDatePicker *datePicker;
 
+@property (strong, nonatomic) NSArray<EXRColor *> *availableColorOptions;
+
 @end
 
-@implementation DetailsViewController {
-    NSArray<EXRColor *> *_availableColorOptions;
-}
+@implementation DetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -134,18 +134,16 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
                      completion:nil];
 
     [self.datePicker.centerXAnchor constraintEqualToAnchor:self.popoverViewController.view.centerXAnchor].active = YES;
-    [self.datePicker.centerYAnchor constraintEqualToAnchor:self.popoverViewController.view.centerYAnchor].active = YES;
-    [saveButton.topAnchor constraintEqualToAnchor:self.datePicker.bottomAnchor constant:5.f].active = YES;
+    [saveButton.topAnchor constraintEqualToAnchor:self.datePicker.bottomAnchor
+                                         constant:5.f].active = YES;
     [saveButton.centerXAnchor constraintEqualToAnchor:self.popoverViewController.view.centerXAnchor].active = YES;
 
-    #warning Ok for now. But for localization compute based content size.
-    self.popoverViewController.preferredContentSize = CGSizeMake(300.f, 300.f);
-
+    self.popoverViewController.preferredContentSize = CGSizeMake(self.datePicker.frame.size.width,
+                                                                 self.datePicker.frame.size.height + saveButton.frame.size.height + 30.f);
 
     UIPopoverPresentationController *popoverController = [self.popoverViewController popoverPresentationController];
 
     [popoverController setPermittedArrowDirections:UIPopoverArrowDirectionAny];
-
     [popoverController setSourceView:self.birthdayButton];
     [popoverController setSourceRect:self.birthdayButton.bounds];
 }
@@ -154,9 +152,6 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
     UIViewController *greetingViewController = [[UIViewController alloc] init];
     greetingViewController.view = [[UIView alloc] init];
 
-    #warning Ok for now. But for localization compute based content size.
-    greetingViewController.preferredContentSize = CGSizeMake(200.f, 200.f);
-
     UILabel *greetingLabel = [UILabel new];
     greetingLabel.translatesAutoresizingMaskIntoConstraints = NO;
     greetingLabel.text = aGreeting;
@@ -164,7 +159,10 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 
     [greetingLabel.centerXAnchor constraintEqualToAnchor:greetingViewController.view.centerXAnchor].active = YES;
     [greetingLabel.centerYAnchor constraintEqualToAnchor:greetingViewController.view.centerYAnchor].active = YES;
-    
+
+    #warning Ok for now. But for localization compute based content size.
+    greetingViewController.preferredContentSize = CGSizeMake(200.f, 100.f);
+
     [greetingViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [self presentViewController:greetingViewController
                        animated:YES
@@ -196,7 +194,7 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
                                                                    message:@"Choose from the available colors"
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
 
-    for (EXRColor *color in _availableColorOptions) {
+    for (EXRColor *color in self.availableColorOptions) {
         UIAlertAction *action = [self alertActionForChoosingColor:color.colorName];
         [alert addAction:action];
     }
@@ -214,7 +212,7 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 - (void)displayPopoverColorPicker {
     ColorsTableViewController *controller = [[ColorsTableViewController alloc] init];
     [controller setPreferredContentSize:CGSizeMake(200.f, 125.f)];
-    [controller setupAvailableColors:_availableColorOptions];
+    controller.availableColorOptions = self.availableColorOptions;
     controller.delegate = self;
     [controller setModalPresentationStyle:UIModalPresentationPopover];
     [self presentViewController:controller
@@ -261,7 +259,9 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
 }
 
 - (void)setupAvailableColors {
-    _availableColorOptions = [NSArray arrayWithObjects:[EXRColor supportedColor:EXRSupportedColorBlue], [EXRColor supportedColor:EXRSupportedColorRed], [EXRColor supportedColor:EXRSupportedColorBlack], nil];
+    self.availableColorOptions = @[[EXRColor supportedColor:EXRSupportedColorBlue],
+                                   [EXRColor supportedColor:EXRSupportedColorRed],
+                                   [EXRColor supportedColor:EXRSupportedColorBlack]];
 }
 
 - (void)setupRightBarButtonItem {
@@ -270,7 +270,7 @@ static NSString *kBirthdayDateFormat = @"MMMM d";
                                                                                            action:@selector(saveProfile:)];
 }
 
--(void)sendSelectedColorName:(NSString *)colorName {
+- (void)didSelectColor:(NSString *)colorName {
     [self.colorButton setTitle:colorName
                       forState:UIControlStateNormal];
 }

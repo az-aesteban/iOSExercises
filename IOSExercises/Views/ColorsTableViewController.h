@@ -7,20 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EXRColor.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol ColorDelegate <NSObject>
 
--(void)sendSelectedColorName:(NSString *)colorName;
+- (void)didSelectColor:(NSString *)colorName;
 
 @end
 
 @interface ColorsTableViewController : UITableViewController
 
-@property (nonatomic, weak) id<ColorDelegate>delegate;
+@property (nonatomic, weak) id<ColorDelegate> delegate;
 
-- (void)setupAvailableColors:(NSArray *)colorOptions;
+@property (nonatomic, strong) NSArray<EXRColor *> *availableColorOptions;
 
 @end
 

@@ -9,11 +9,9 @@
 #import "ColorsTableViewController.h"
 #import "EXRColor.h"
 
-static NSString *kCellIdentifier = @"colorCell";
+static NSString *const kCellIdentifier = @"colorCell";
 
-@implementation ColorsTableViewController {
-    NSArray<EXRColor *> *_availableColorOptions;
-}
+@implementation ColorsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,9 +22,14 @@ static NSString *kCellIdentifier = @"colorCell";
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *chosenColor = [_availableColorOptions objectAtIndex:indexPath.item].colorName;
-    NSLog(@"ColorsTableViewController: User chose color %@",  chosenColor);
-    [self.delegate sendSelectedColorName:chosenColor];
+
+    if (indexPath.item < self.availableColorOptions.count) {
+        NSString *chosenColor = [self.availableColorOptions objectAtIndex:indexPath.item].colorName;
+        NSLog(@"ColorsTableViewController: User chose color %@", chosenColor);
+        [self.delegate didSelectColor:chosenColor];
+    } else {
+        NSAssert(NO, @"ColorsTableViewController: Selected row has no color option.");
+    }
 }
 
 #pragma mark - Table view data source
@@ -36,7 +39,7 @@ static NSString *kCellIdentifier = @"colorCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _availableColorOptions.count;
+    return self.availableColorOptions.count;
 }
 
 
@@ -48,17 +51,14 @@ static NSString *kCellIdentifier = @"colorCell";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:kCellIdentifier];
     }
-    EXRColor *color = [_availableColorOptions objectAtIndex:indexPath.item];
-    cell.textLabel.text = color.colorName;
-    cell.textLabel.textColor = color.uiColor;
+    if (indexPath.item < self.availableColorOptions.count) {
+        EXRColor *color = [self.availableColorOptions objectAtIndex:indexPath.item];
+        cell.textLabel.text = color.colorName;
+        cell.textLabel.textColor = color.uiColor;
+    } else {
+        NSAssert(NO, @"ColorsTableViewController: No color option on selected row.");
+    }
     return cell;
-}
-
-
-#pragma mark - Helper Methods
-
-- (void)setupAvailableColors:(NSArray *)colorOptions {
-    _availableColorOptions = colorOptions;
 }
 
 @end

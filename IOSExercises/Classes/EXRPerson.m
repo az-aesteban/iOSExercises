@@ -10,37 +10,36 @@
 
 @implementation EXRPerson
 
-+ (instancetype)personNamed:(NSString *)aName
-               withBirthday:(NSDate *)aBirthday
-                   andImage:(NSString *)anImage
-                 likesColor:(EXRColor *)aColor {
++ (instancetype)personWithName:(NSString *)aName
+                      birthday:(NSDate *)aBirthday
+                 imageFilepath:(NSString *)anImageFilepath
+                         color:(EXRColor *)aColor {
     return [[self alloc] initPersonWithName:aName
-                               withBirthday:aBirthday
-                                  withImage:anImage
-                                   andColor:aColor];
+                                   birthday:aBirthday
+                              imageFilepath:anImageFilepath
+                                      color:aColor];
 }
 
 - (instancetype)initPersonWithName:(NSString *)aName
-                      withBirthday:(NSDate *)aBirthday
-                         withImage:(NSString *)anImage
-                          andColor:(EXRColor *)aColor {
-    self = [super init];
-    if (self) {
-        self.name = aName;
-        self.birthday = aBirthday;
-        self.image = anImage;
-        self.color = aColor;
+                          birthday:(NSDate *)aBirthday
+                     imageFilepath:(NSString *)anImageFilepath
+                             color:(EXRColor *)aColor {
+    if (self = [super init]) {
+        _name = aName;
+        _birthday = aBirthday;
+        _imageFilepath = anImageFilepath;
+        _color = aColor;
     }
     return self;
 }
 
--(BOOL)isBirthdayToday {
+- (BOOL)isBirthdayToday {
     NSDateComponents *birthdayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth
                                                                           fromDate:self.birthday];
     NSDateComponents *todayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth
                                                                        fromDate:[NSDate date]];
-    return birthdayComponent.day == todayComponent.day
-        && birthdayComponent.month == todayComponent.month;
+    return (birthdayComponent.day == todayComponent.day
+            && birthdayComponent.month == todayComponent.month);
 }
 
 @end
