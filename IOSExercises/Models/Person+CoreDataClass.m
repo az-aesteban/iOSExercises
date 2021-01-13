@@ -9,7 +9,7 @@
 
 #import "Person+CoreDataClass.h"
 
-static NSString *kEntityName = @"Person";
+static NSString *const kEntityName = @"Person";
 
 @implementation Person
 

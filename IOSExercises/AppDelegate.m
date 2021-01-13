@@ -20,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.dataController = [[EXRCoreDataController alloc] initWithCompletionBlock:^ (EXRCoreDataController *controller) {
-       // [self insertDummyDataWithController:controller];
+        [self insertDummyDataWithController:controller];
 
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
@@ -73,7 +73,7 @@
                                       andDay:5
                                      andYear:2013];
     mocha.color = EXRSupportedColorBlue;
-    mocha.image = @"Mocha-DP";
+    mocha.imageFilepath = @"Mocha-DP";
 
     Person *latte = [Person createEmptyPersonWithContext:controller.managedObjectContext];
     latte.name = @"Sugarcub Latte";
@@ -81,7 +81,7 @@
                                       andDay:3
                                      andYear:2013];
     latte.color = EXRSupportedColorRed;
-    latte.image = @"Latte-DP";
+    latte.imageFilepath = @"Latte-DP";
 
     Person *qoobee = [Person createEmptyPersonWithContext:controller.managedObjectContext];
     qoobee.name = @"Qoobee Agapi";
@@ -89,7 +89,7 @@
                                        andDay:12
                                       andYear:2013];
     qoobee.color = EXRSupportedColorBlack;
-    qoobee.image = @"Qoobee-DP";
+    qoobee.imageFilepath = @"Qoobee-DP";
 
     [controller saveContext];
 }

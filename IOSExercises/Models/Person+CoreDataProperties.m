@@ -17,7 +17,7 @@
 
 @dynamic birthday;
 @dynamic color;
-@dynamic image;
+@dynamic imageFilepath;
 @dynamic name;
 
 @end

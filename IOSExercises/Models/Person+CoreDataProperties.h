@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) int64_t color;
 
-@property (nullable, nonatomic, copy) NSString *image;
+@property (nullable, nonatomic, copy) NSString *imageFilepath;
 
 @property (nullable, nonatomic, copy) NSString *name;
 

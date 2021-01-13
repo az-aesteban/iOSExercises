@@ -9,7 +9,7 @@
 #import "ColorsTableViewController.h"
 #import "EXRColor.h"
 
-NSString *const kCellIdentifier = @"colorCell";
+static NSString *const kCellIdentifier = @"colorCell";
 
 @implementation ColorsTableViewController
 

@@ -165,9 +165,9 @@ static NSString *kCellIdentifier = @"profileViewCell";
     [self.birthdayListSwitch addTarget:self
                      action:@selector(switchIsChanged:)
            forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithCustomView:self.birthdayListSwitch], blackFilterButtonItem, allFilterButtonItem, nil];
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:self.birthdayListSwitch],
+                                                blackFilterButtonItem,
+                                                allFilterButtonItem];
 }
-
-
 
 @end

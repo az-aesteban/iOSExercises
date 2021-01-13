@@ -108,7 +108,7 @@ const CGFloat iPhoneProfileImageHeight = 150.f;
 #pragma mark - Data Methods
 
 - (void)setupPersonData {
-    self.profileImageView.image = [UIImage imageNamed:self.person.image];
+    self.profileImageView.image = [UIImage imageNamed:self.person.imageFilepath];
     self.nameLabel.text = self.person.name;
 }
 

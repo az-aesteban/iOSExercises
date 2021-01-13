@@ -35,7 +35,7 @@
 
 - (void)setupProfileData {
     self.nameLabel.text = self.person.name;
-    self.profileImageView.image = [UIImage imageNamed:self.person.image];
+    self.profileImageView.image = [UIImage imageNamed:self.person.imageFilepath];
 }
 
 - (void)setupBirthdayConstraints {

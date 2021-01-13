@@ -3,7 +3,7 @@
     <entity name="Person" representedClassName="Person" syncable="YES">
         <attribute name="birthday" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="color" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="imageFilepath" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
     </entity>
     <elements>
