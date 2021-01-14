@@ -15,12 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Person : NSManagedObject
 
-+ (Person *)createEmptyPersonWithContext:(NSManagedObjectContext *)aContext;
++ (Person *)personWithContext:(NSManagedObjectContext *)context;
 
-+ (NSArray<Person *> *)fetchAllPersonsWithContext:(NSManagedObjectContext *) aContext;
++ (NSArray<Person *> *)personsWithContext:(NSManagedObjectContext *)context;
 
-+ (NSArray<Person *> *)fetchPersonsWithColor:(EXRSupportedColor) aColor
-                                 withContext:(NSManagedObjectContext *) aContext;
++ (NSArray<Person *> *)personsWithColor:(EXRSupportedColor)color
+                                context:(NSManagedObjectContext *)context;
 
 @end
 

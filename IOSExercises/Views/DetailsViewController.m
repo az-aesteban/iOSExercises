@@ -98,9 +98,6 @@ static NSString *const kBirthdayDateFormat = @"MMMM d";
 
 - (IBAction)didTapSaveButton:(id)sender {
     NSLog(@"DetailsViewController: Tapped Save Button");
-    // Ignore: From Exercise 3
-    // NSLog(@"DetailsViewController: Changes have not been saved");
-    // [self promptErrorWithMessage:@"Changes have not been saved"];
     NSDateFormatter *dateFormatter = [self birthdayFormatter];
     NSDate *birthdate = [dateFormatter dateFromString:self.birthdayButton.currentTitle];
 
@@ -191,7 +188,7 @@ static NSString *const kBirthdayDateFormat = @"MMMM d";
  
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                             style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
+                                                          handler:^(UIAlertAction *action) {}];
     [alert addAction:defaultAction];
     [self presentViewController:alert
                        animated:YES
@@ -206,7 +203,7 @@ static NSString *const kBirthdayDateFormat = @"MMMM d";
  
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK"
                                                             style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
+                                                          handler:^(UIAlertAction *action) {}];
     [alert addAction:defaultAction];
     [self presentViewController:alert
                        animated:YES

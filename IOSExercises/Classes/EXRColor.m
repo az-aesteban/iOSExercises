@@ -10,17 +10,21 @@
 
 #import "Person+CoreDataClass.h"
 
-@implementation EXRColor {
-    int64_t _colorCode;
+@interface EXRColor ()
+
+@property (nonatomic, assign) NSInteger colorCode;
+
+@end
+
+@implementation EXRColor
+
++ (instancetype)supportedColor:(EXRSupportedColor)aSupportedColor {
+    return [[EXRColor alloc] initWithSupportedColor:aSupportedColor];
 }
 
-+ (instancetype)supportedColor:(EXRSupportedColor)aSuppportedColor {
-    return [[EXRColor alloc] initWithSupportedColor:aSuppportedColor];
-}
-
-- (instancetype)initWithSupportedColor:(EXRSupportedColor)aSuppportedColor {
+- (instancetype)initWithSupportedColor:(EXRSupportedColor)aSupportedColor {
     if (self = [super init]) {
-        switch (aSuppportedColor) {
+        switch (aSupportedColor) {
             case EXRSupportedColorBlue:
                 self.uiColor = [UIColor blueColor];
                 self.colorName = @"Blue";
@@ -36,7 +40,7 @@
             default:
                 NSAssert(NO, @"EXRColor: Color not supported.");
         }
-        _colorCode = aSuppportedColor;
+        self.colorCode = aSupportedColor;
     }
     return self;
 }
@@ -51,10 +55,6 @@
         supportedColor = EXRSupportedColorBlack;
     }
     return supportedColor;
-}
-
-- (int64_t) colorCode {
-    return _colorCode;
 }
 
 @end

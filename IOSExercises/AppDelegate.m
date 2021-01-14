@@ -19,7 +19,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.dataController = [[EXRCoreDataController alloc] initWithCompletionBlock:^ (EXRCoreDataController *controller) {
+    self.dataController = [[EXRCoreDataController alloc] initWithCompletionBlock:^(EXRCoreDataController *controller) {
         [self insertDummyDataWithController:controller];
 
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -28,7 +28,7 @@
                                                                                          bundle:[NSBundle mainBundle]];
         self.profilesTableViewController.dataController = controller;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.profilesTableViewController];
-        [self.window setRootViewController: navigationController];
+        [self.window setRootViewController:navigationController];
         [self.window makeKeyAndVisible];
     }];
     return YES;
@@ -65,44 +65,33 @@
 
 #pragma mark - Data Setup Methods
 
-- (void) insertDummyDataWithController:(EXRCoreDataController *)controller {
+- (void)insertDummyDataWithController:(EXRCoreDataController *)controller {
 
-    Person *mocha = [Person createEmptyPersonWithContext:controller.managedObjectContext];
+    Person *mocha = [Person personWithContext:controller.managedObjectContext];
     mocha.name = @"Sugarcub Mocha";
-    mocha.birthday = [self birthdayFromMonth:5
-                                      andDay:5
-                                     andYear:2013];
+    [mocha setBirthdayWithMonth:5
+                            day:5
+                           year:2013];
     mocha.color = EXRSupportedColorBlue;
     mocha.imageFilepath = @"Mocha-DP";
 
-    Person *latte = [Person createEmptyPersonWithContext:controller.managedObjectContext];
+    Person *latte = [Person personWithContext:controller.managedObjectContext];
     latte.name = @"Sugarcub Latte";
-    latte.birthday = [self birthdayFromMonth:3
-                                      andDay:3
-                                     andYear:2013];
+    [latte setBirthdayWithMonth:3
+                            day:3
+                           year:2013];
     latte.color = EXRSupportedColorRed;
     latte.imageFilepath = @"Latte-DP";
 
-    Person *qoobee = [Person createEmptyPersonWithContext:controller.managedObjectContext];
+    Person *qoobee = [Person personWithContext:controller.managedObjectContext];
     qoobee.name = @"Qoobee Agapi";
-    qoobee.birthday = [self birthdayFromMonth:12
-                                       andDay:12
-                                      andYear:2013];
+    [qoobee setBirthdayWithMonth:1
+                             day:14
+                            year:2013];
     qoobee.color = EXRSupportedColorBlack;
     qoobee.imageFilepath = @"Qoobee-DP";
 
     [controller saveContext];
-}
-
-
-- (NSDate *)birthdayFromMonth:(NSInteger)aMonth
-                       andDay:(NSInteger)aDay
-                      andYear:(NSInteger)aYear {
-    NSDateComponents *birthdayComponents = [[NSDateComponents alloc] init];
-    [birthdayComponents setMonth:aMonth];
-    [birthdayComponents setDay:aDay];
-    [birthdayComponents setYear:aYear];
-    return [[NSCalendar currentCalendar] dateFromComponents:birthdayComponents];
 }
 
 @end

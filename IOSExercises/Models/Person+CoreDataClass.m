@@ -15,20 +15,19 @@ static NSString *const kEntityName = @"Person";
 
 #pragma mark - Creating Managed Object Methods
 
-+ (Person *)createEmptyPersonWithContext:(NSManagedObjectContext *)aContext {
++ (Person *)personWithContext:(NSManagedObjectContext *)context {
     return [NSEntityDescription insertNewObjectForEntityForName:kEntityName
-                                         inManagedObjectContext:aContext];
+                                         inManagedObjectContext:context];
 }
 
 #pragma mark - Fetching Object Methods
 
-+ (NSArray<Person *> *)fetchAllPersonsWithContext:(NSManagedObjectContext *) aContext {
-
++ (NSArray<Person *> *)personsWithContext:(NSManagedObjectContext *)context {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kEntityName];
 
     NSError *error = nil;
-    NSArray *results = [aContext executeFetchRequest:fetchRequest
-                                               error:&error];
+    NSArray *results = [context executeFetchRequest:fetchRequest
+                                              error:&error];
 
     if (!results) {
         NSLog(@"Person: Error fetching Person objects: %@\n%@", error.localizedDescription, error.userInfo);
@@ -37,15 +36,15 @@ static NSString *const kEntityName = @"Person";
     return results;
 }
 
-+ (NSArray<Person *> *)fetchPersonsWithColor:(EXRSupportedColor) aColor
-                                         withContext:(NSManagedObjectContext *) aContext {
++ (NSArray<Person *> *)personsWithColor:(EXRSupportedColor)color
+                                context:(NSManagedObjectContext *)context {
 
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kEntityName];
-    fetchRequest.predicate = [Person predicateWithColor:aColor];
+    fetchRequest.predicate = [Person predicateWithColor:color];
 
     NSError *error = nil;
-    NSArray *results = [aContext executeFetchRequest:fetchRequest
-                                               error:&error];
+    NSArray *results = [context executeFetchRequest:fetchRequest
+                                              error:&error];
 
     if (!results) {
         NSAssert2(NO, @"Person: Error fetching Person objects: %@\n%@", error.localizedDescription, error.userInfo);
@@ -54,8 +53,18 @@ static NSString *const kEntityName = @"Person";
     return results;
 }
 
-+ (NSPredicate *)predicateWithColor:(EXRSupportedColor) aColor {
-    return [NSPredicate predicateWithFormat:@"color = %ld", aColor];
++ (NSPredicate *)predicateWithColor:(EXRSupportedColor)color {
+    return [NSPredicate predicateWithFormat:@"color = %ld", color];
+}
+
+- (void)setBirthdayWithMonth:(NSInteger)month
+                         day:(NSInteger)day
+                        year:(NSInteger)year {
+    NSDateComponents *birthdayComponents = [[NSDateComponents alloc] init];
+    [birthdayComponents setMonth:month];
+    [birthdayComponents setDay:day];
+    [birthdayComponents setYear:year];
+    self.birthday = [[NSCalendar currentCalendar] dateFromComponents:birthdayComponents];
 }
 
 @end

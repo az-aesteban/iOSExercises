@@ -18,11 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, copy) NSDate *birthday;
 
-@property (nonatomic) int64_t color;
+@property (nonatomic, assign) NSInteger color;
 
 @property (nullable, nonatomic, copy) NSString *imageFilepath;
 
 @property (nullable, nonatomic, copy) NSString *name;
+
+- (void)setBirthdayWithMonth:(NSInteger)month
+                         day:(NSInteger)day
+                        year:(NSInteger)year;
 
 @end
 

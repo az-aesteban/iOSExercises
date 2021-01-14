@@ -70,32 +70,29 @@ static NSString *kCellIdentifier = @"profileViewCell";
     ProfileViewController *profileViewController = [[ProfileViewController alloc] initWithNibName:@"ProfileViewController"
                                                                                            bundle:[NSBundle mainBundle]];
 
-    if (indexPath.item < self.persons.count) {
-        Person *person = [self.persons objectAtIndex:indexPath.item];
-        profileViewController.person = person;
-        profileViewController.dataController = self.dataController;
-
-        [self.navigationController pushViewController:profileViewController
-                                             animated:YES];
-    } else {
+    if (indexPath.item >= self.persons.count) {
         NSAssert(NO, @"ProfilesTableViewController: Selected row does not match to a profile");
+        return;
     }
+    Person *person = [self.persons objectAtIndex:indexPath.item];
+    profileViewController.person = person;
+    profileViewController.dataController = self.dataController;
+    [self.navigationController pushViewController:profileViewController
+                                         animated:YES];
 }
 
 #pragma mark - Data initialization Methods
 
 - (void)setupPersons {
-    self.persons = [Person fetchAllPersonsWithContext:self.dataController.managedObjectContext];
+    self.persons = [Person personsWithContext:self.dataController.managedObjectContext];
 }
 
 - (NSArray<Person *> *)fetchPersonsWithBirthdayToday {
 
-    NSArray<Person *> *persons = [Person fetchAllPersonsWithContext:self.dataController.managedObjectContext];
+    NSArray<Person *> *persons = [Person personsWithContext:self.dataController.managedObjectContext];
 
-    NSPredicate *birthdayPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
-
-        Person *fetchedPerson = (Person *) evaluatedObject;
-
+    NSPredicate *birthdayPredicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> *_Nullable bindings) {
+        Person *fetchedPerson = (Person *)evaluatedObject;
         return [self isBirthdayTodayOfPerson:fetchedPerson];
     }];
     return [persons filteredArrayUsingPredicate:birthdayPredicate];
@@ -120,21 +117,21 @@ static NSString *kCellIdentifier = @"profileViewCell";
     if ([buttonTitle isEqualToString:@"All"]) {
         [self setupPersons];
     } else {
-        _persons = [Person fetchPersonsWithColor:[EXRColor colorWithName:buttonTitle]
-                                     withContext:self.dataController.managedObjectContext];
+        self.persons = [Person personsWithColor:[EXRColor colorWithName:buttonTitle]
+                                        context:self.dataController.managedObjectContext];
     }
     self.birthdayListSwitch.on = NO;
     [self.tableView reloadData];
 }
 
-- (void) switchIsChanged:(UISwitch *)paramSender{
+- (void)switchIsChanged:(UISwitch *)paramSender {
     NSLog(@"ProfilesTableViewController: Switch is tapped");
     if ([paramSender isOn]){
-        _persons = [self fetchPersonsWithBirthdayToday];
-        NSLog(@"ProfilesTableViewController: Switch is on");
+        self.persons = [self fetchPersonsWithBirthdayToday];
+        NSLog(@"ProfilesTableViewController: Birthday switch is on");
     } else {
         [self setupPersons];
-        NSLog(@"ProfilesTableViewController: Switch is off");
+        NSLog(@"ProfilesTableViewController: Birthday switch is off");
     }
     [self.tableView reloadData];
 }
@@ -146,9 +143,9 @@ static NSString *kCellIdentifier = @"profileViewCell";
     self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
-- (UIBarButtonItem *)createBarButtonItemWithTitle:(NSString *)aTitle {
+- (UIBarButtonItem *)barButtonItemWithTitle:(NSString *)title {
     UIButton *barButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [barButton setTitle:aTitle
+    [barButton setTitle:title
                forState:UIControlStateNormal];
     [barButton addTarget:self
                   action:@selector(didTapFilterButton:)
@@ -157,13 +154,13 @@ static NSString *kCellIdentifier = @"profileViewCell";
 }
 
 - (void)setupNavigationFilterButtons {
-    UIBarButtonItem *blackFilterButtonItem = [self createBarButtonItemWithTitle:@"Black"];
-    UIBarButtonItem *allFilterButtonItem = [self createBarButtonItemWithTitle:@"All"];
+    UIBarButtonItem *blackFilterButtonItem = [self barButtonItemWithTitle:@"Black"];
+    UIBarButtonItem *allFilterButtonItem = [self barButtonItemWithTitle:@"All"];
 
     self.birthdayListSwitch = [[UISwitch alloc] init];
     self.birthdayListSwitch.on = NO;
     [self.birthdayListSwitch addTarget:self
-                     action:@selector(switchIsChanged:)
+                                action:@selector(switchIsChanged:)
            forControlEvents:UIControlEventValueChanged];
     self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:self.birthdayListSwitch],
                                                 blackFilterButtonItem,

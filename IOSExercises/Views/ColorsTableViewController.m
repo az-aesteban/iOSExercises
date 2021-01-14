@@ -23,12 +23,12 @@ static NSString *const kCellIdentifier = @"colorCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.item < self.availableColorOptions.count) {
+    if (indexPath.item >= self.availableColorOptions.count) {
+        NSAssert(NO, @"ColorsTableViewController: Selected row has no color option.");
+    } else {
         NSString *chosenColor = [self.availableColorOptions objectAtIndex:indexPath.item].colorName;
         NSLog(@"ColorsTableViewController: User chose color %@", chosenColor);
         [self.delegate didSelectColor:chosenColor];
-    } else {
-        NSAssert(NO, @"ColorsTableViewController: Selected row has no color option.");
     }
 }
 
@@ -51,12 +51,12 @@ static NSString *const kCellIdentifier = @"colorCell";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:kCellIdentifier];
     }
-    if (indexPath.item < self.availableColorOptions.count) {
+    if (indexPath.item >= self.availableColorOptions.count) {
+        NSAssert(NO, @"ColorsTableViewController: No color option on selected row.");
+    } else {
         EXRColor *color = [self.availableColorOptions objectAtIndex:indexPath.item];
         cell.textLabel.text = color.colorName;
         cell.textLabel.textColor = color.uiColor;
-    } else {
-        NSAssert(NO, @"ColorsTableViewController: No color option on selected row.");
     }
     return cell;
 }

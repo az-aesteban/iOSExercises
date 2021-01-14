@@ -19,9 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ColorsTableViewController : UITableViewController
 
-@property(nonatomic, weak) id<ColorDelegate> delegate;
+@property (nonatomic, weak) id<ColorDelegate> delegate;
 
-@property(nonatomic, strong) NSArray<EXRColor *> *availableColorOptions;
+@property (nonatomic, strong) NSArray<EXRColor *> *availableColorOptions;
 
 @end
 

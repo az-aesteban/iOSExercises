@@ -28,8 +28,6 @@ typedef NS_ENUM(NSInteger, EXRSupportedColor) {
 
 + (EXRSupportedColor)colorWithName:(NSString *)colorName;
 
-- (int64_t) colorCode;
-
 @end
 
 NS_ASSUME_NONNULL_END

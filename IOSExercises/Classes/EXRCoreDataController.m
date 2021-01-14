@@ -11,17 +11,14 @@
 
 @implementation EXRCoreDataController
 
-- (id)initWithCompletionBlock:(void (^)(EXRCoreDataController *))callback {
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    NSPersistentContainer *container = self.persistentContainer;
-    if (container) {
-        callback(self);
-    } else {
-        NSAssert(NO, @"EXRCoreDataController: No Persistent Container found");
+- (instancetype)initWithCompletionBlock:(void (^)(EXRCoreDataController *))callback {
+    if (self = [super init]) {
+        NSPersistentContainer *container = self.persistentContainer;
+        if (!container) {
+            NSAssert(NO, @"EXRCoreDataController: No Persistent Container found");
+        } else {
+            callback(self);
+        }
     }
     return self;
 }
@@ -54,7 +51,6 @@
             }];
         }
     }
-    
     return _persistentContainer;
 }
 
